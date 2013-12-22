@@ -92,14 +92,16 @@ public class MainActivity extends Activity {
                 
 //                img.setImageBitmap(bitmap );
 
-				Matrix m = img.getImageMatrix();
-				m.postRotate(messData.getRotate());
-				bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-						  bitmap.getWidth(), bitmap.getHeight(), m, true);
-				img.setImageBitmap(bitmap );
-// breaks              bitmap.recycle();
+                if(bitmap != null) {
+    				Matrix m = img.getImageMatrix();
+    				m.postRotate(messData.getRotate());
+    				bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+    						  bitmap.getWidth(), bitmap.getHeight(), m, true);
+    				img.setImageBitmap(bitmap );
+    // breaks              bitmap.recycle();
 
-//                // img.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath) );
+//                    // img.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath) );                	
+                }
             }
             else if(requestCode == MESSAGE_SETTINGS) {
         		messData = (MessageData)data.getSerializableExtra(MainActivity.MESSAGE);
