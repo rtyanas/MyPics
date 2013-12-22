@@ -1,0 +1,12 @@
+package com.yanas.mobileapp.mypic;
+
+public class MessageSelected {
+	  private String message = "message";
+	  private String mSize = "size";
+	  private String mFont = "font";
+	  private String mBold = "bold";
+	  private String mItalic = "italic";
+
+	  private String PIC = "pic";
+
+}

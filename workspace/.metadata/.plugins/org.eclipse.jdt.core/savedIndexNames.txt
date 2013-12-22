@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+C:\Users\RT\MyPic\MyPicRepository\workspace\.metadata\.plugins\org.eclipse.jdt.core
+2520710139.index
+3819658647.index

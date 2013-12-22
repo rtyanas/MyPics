@@ -1,0 +1,107 @@
+package com.yanas.mobileapp.mypic;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class SettingsActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_settings);
+		
+		setupSettingsActivity();
+		
+		Button button = (Button)findViewById(R.id.done);
+		button.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent();
+				intent.putExtra(MainActivity.MESSAGE, ((TextView)findViewById(R.id.message_text)).getText().toString() );
+				intent.putExtra(MainActivity.FONT, ((TextView)findViewById(R.id.font)).getText().toString() );
+				intent.putExtra(MainActivity.STYLE, ((TextView)findViewById(R.id.style)).getText().toString() );
+				intent.putExtra(MainActivity.SIZE, ((TextView)findViewById(R.id.size)).getText().toString() );
+				intent.putExtra(MainActivity.COLOR, ((TextView)findViewById(R.id.color)).getText().toString() );
+				intent.putExtra(MainActivity.ROTATE, ((TextView)findViewById(R.id.rotate)).getText().toString() );
+				
+				setResult(Activity.RESULT_OK, intent);
+								
+				finish();
+			}
+		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.settings, menu);
+		return true;
+	}
+	
+	private void setupSettingsActivity() {
+		// Font
+		Spinner spinFont = (Spinner)findViewById(R.id.font);
+		ArrayAdapter<CharSequence> adapterF = ArrayAdapter.createFromResource(this,
+		        R.array.Fonts, android.R.layout.simple_spinner_item);
+		adapterF.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinFont.setAdapter(adapterF);
+		spinFont.setOnItemSelectedListener(new FontOnItemSelectedListener());
+		// Style
+		Spinner spinStyle = (Spinner)findViewById(R.id.style);
+		ArrayAdapter<CharSequence> adapterS = ArrayAdapter.createFromResource(this,
+		        R.array.Style, android.R.layout.simple_spinner_item);
+		adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinStyle.setAdapter(adapterS);
+		// Color
+		Spinner spinColor = (Spinner)findViewById(R.id.color);
+		ArrayAdapter<CharSequence> adapterC = ArrayAdapter.createFromResource(this,
+		        R.array.Color, android.R.layout.simple_spinner_item);
+		adapterC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinColor.setAdapter(adapterC);
+		// Size
+		Spinner spinSize = (Spinner)findViewById(R.id.size);
+		ArrayAdapter<CharSequence> adapterSz = ArrayAdapter.createFromResource(this,
+		        R.array.Size, android.R.layout.simple_spinner_item);
+		adapterSz.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinSize.setAdapter(adapterSz);
+		// Rotate
+		Spinner spinRotate = (Spinner)findViewById(R.id.rotate);
+		ArrayAdapter<CharSequence> adapterR = ArrayAdapter.createFromResource(this,
+		        R.array.Rotate, android.R.layout.simple_spinner_item);
+		adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinRotate.setAdapter(adapterR);
+
+
+	}
+	
+	public class FontOnItemSelectedListener implements OnItemSelectedListener {
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			if(GlobalSettings.settingsActivity) Log.d("SettingsActivity", "setupSettingsActivity Selected Item:"+
+					arg0.getItemAtPosition(arg2));
+			
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
+}

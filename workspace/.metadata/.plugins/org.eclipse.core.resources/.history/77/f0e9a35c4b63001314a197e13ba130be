@@ -1,0 +1,155 @@
+package com.yanas.mobileapp.mypic.datastore;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import com.yanas.mobileapp.mypic.MessageSelected;
+import com.yanas.mobileapp.weathercast.GlobalSettings;
+import com.yanas.mobileapp.weathercast.MessageSelected;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+public class MessageListDbData {
+	
+	Context context;
+
+	  // Database fields
+	  private SQLiteDatabase database;
+	  private MessageListDbHelper dbHelper;
+	  private String[] allColumns = {
+			  MessageListDbHelper.COLUMN_ID,
+			  MessageListDbHelper.COLUMN_MESSAGE,
+			  MessageListDbHelper.COLUMN_MFONT,
+			  MessageListDbHelper.COLUMN_MBOLD,
+			  MessageListDbHelper.COLUMN_MITALIC,
+			  MessageListDbHelper.COLUMN_MSIZE,
+			  MessageListDbHelper.COLUMN_PIC 
+	  };
+
+	  public MessageListDbData(Context context_in) {
+		  context = context_in;
+	    dbHelper = new MessageListDbHelper(context);
+	  }
+
+	  public void open() throws SQLException {
+	    database = dbHelper.getWritableDatabase();
+	    Log.d("BuildingDbData", "database: open? "+ database.isOpen() + database.toString());
+	  }
+
+	  public void close() {
+	    dbHelper.close();
+	  }
+
+	  public MessageSelected createMessage(String city, String state, 
+			  String zipCode, String lat, String lon) {
+	    ContentValues values = new ContentValues();
+	    MessageSelected newBuilding = new MessageSelected(context, city, state, zipCode);
+
+	    values.put(MessageListDbHelper.COLUMN_CITY, city);
+	    values.put(MessageListDbHelper.COLUMN_STATE, state);
+	    values.put(MessageListDbHelper.COLUMN_ZIP_CODE, zipCode);
+	    values.put(MessageListDbHelper.COLUMN_LAT, lat);
+	    values.put(MessageListDbHelper.COLUMN_LON, lon);
+	    long insertId = database.insert(MessageListDbHelper.TABLE, null,
+	        values);
+//	    if(insertId != -1) {
+//		    Cursor cursor = database.query(MessageListDbHelper.TABLE,
+//		        allColumns, MessageListDbHelper.COLUMN_ID + " = " + insertId, null,
+//		        null, null, null);
+//		    cursor.moveToFirst();
+//		    newBuilding = cursorToBuilding(cursor);
+//		    cursor.close();
+//	    }
+	    return newBuilding;
+	  }
+
+	  public void deleteStation(MessageSelected comment) {
+	    long id = comment.getId();
+	    if(GlobalSettings.city_list_db_data) Log.i("MessageListDbData", "delete Station with id: " + id);
+	    database.delete(MessageListDbHelper.TABLE, MessageListDbHelper.COLUMN_ID
+	        + " = " + id, null);
+	  }
+	  
+		public int initDB(Vector<MessageSelected> stations) {
+			int numStationsRet=0;
+//			Cursor cursor = database.rawQuery("", null);
+			long numRows = DatabaseUtils.longForQuery(
+					database, "SELECT COUNT(*) FROM "+ MessageListDbHelper.TABLE, null);
+			if(numRows <= 0) {
+				for(MessageSelected ss : stations) {
+					this.createStation(ss.getCity(), ss.getState(), 
+							ss.getZipCode(), ss.getLatitude(), ss.getLongitude());
+					numStationsRet++;
+				}
+			}
+			else {
+				Log.d("MessageListDbData", 
+						"records not added to database, existing records: "+ numRows);
+			}
+			
+			return numStationsRet;
+		}
+		
+
+
+
+	  public List<MessageSelected> getAllCityZipData() {
+	    List<MessageSelected> comments = new ArrayList<MessageSelected>();
+
+	    Cursor cursor = database.query(MessageListDbHelper.TABLE,
+	        allColumns, null, null, null, null, null);
+
+	    cursor.moveToFirst();
+	    while (!cursor.isAfterLast()) {
+	    	MessageSelected comment = cursorToBuilding(cursor);
+	      comments.add(comment);
+	      cursor.moveToNext();
+	    }
+	    // make sure to close the cursor
+	    cursor.close();
+	    return comments;
+	  }
+
+	  public MessageSelected getBuilding(int hashCode) {
+		    MessageSelected building = new MessageSelected(context, "", "", "");
+
+		    Cursor cursor = database.query(MessageListDbHelper.TABLE,
+		        allColumns, null, null, null, null, null);
+
+		    cursor.moveToFirst();
+		    while (!cursor.isAfterLast()) {
+		    	building = cursorToBuilding(cursor);
+		    	cursor.moveToNext();
+		    }
+		    // make sure to close the cursor
+		    cursor.close();
+		    return building;
+		  }
+
+	  private MessageSelected cursorToBuilding(Cursor cursor) {
+		String city, st, zip;  
+		MessageSelected station = new MessageSelected(
+				context, cursor.getString(1), cursor.getString(2), cursor.getString(3));
+
+		station.setId(Long.parseLong(cursor.getString(0)) );
+		
+		station.setLatitude(cursor.getString(4));
+		station.setLongitude(cursor.getString(5));
+
+		return station;
+	  }
+
+	public SQLiteDatabase getDatabase() {
+		return database;
+	}
+
+
+	  
+}
