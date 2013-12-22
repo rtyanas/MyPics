@@ -23,6 +23,7 @@ public class MessageData implements Serializable {
 
 	private String pic;
 	private HashMap<Integer, String> colorIntStr;
+	private HashMap<String, Integer> colorStrInt;
 
 	
 	public MessageData() {
@@ -75,6 +76,20 @@ public class MessageData implements Serializable {
         colorIntStr.put(Color.MAGENTA, "Magenta");
         colorIntStr.put(Color.TRANSPARENT, "Transparent");
         colorIntStr.put(Color.YELLOW, "Yellow");
+
+		colorStrInt = new HashMap<String, Integer>();
+		colorStrInt.put("Black", Color.BLACK); 
+		colorStrInt.put("Red", Color.RED);
+        colorStrInt.put("Green", Color.GREEN);
+        colorStrInt.put("White", Color.WHITE);
+        colorStrInt.put("Blue", Color.BLUE);
+        colorStrInt.put("Grey", Color.GRAY);
+        colorStrInt.put("Cyan", Color.CYAN);
+        colorStrInt.put("Dark Gray", Color.DKGRAY);
+        colorStrInt.put("Magenta", Color.MAGENTA);
+        colorStrInt.put("Transparent", Color.TRANSPARENT);
+        colorStrInt.put("Yellow", Color.YELLOW);
+        
 	}
 
 
@@ -181,46 +196,20 @@ public class MessageData implements Serializable {
 	}
 
 	public int stringToColor(String colorStr) {
-        if(colorStr.equals("Black") ) {
-        	return Color.BLACK;
-        }
-        else if(colorStr.equals("Red") ) {
-        	return Color.RED;
-        }
-        else if(colorStr.equals("Green") ) {
-        	return Color.GREEN;
-        }
-        else if(colorStr.equals("White") ) {
-        	return Color.WHITE;
-        }
-        else if(colorStr.equals("Blue") ) {
-        	return Color.BLUE;
-        }
-        else if(colorStr.equals("Grey") ) {
-        	return Color.GRAY;
-        }
-        else if(colorStr.equals("Cyan") ) {
-        	return Color.CYAN;
-        }
-        else if(colorStr.equals("Dark Gray") ) {
-        	return Color.DKGRAY;
-        }
-        else if(colorStr.equals("Magenta") ) {
-        	return Color.MAGENTA;
-        }
-        else if(colorStr.equals("Transparent") ) {
-        	return Color.TRANSPARENT;
-        }
-        else if(colorStr.equals("Yellow") ) {
-        	return Color.YELLOW;
-        }
-        
-        // Default
+
+		if(colorStrInt != null) {
+			return colorStrInt.get(colorStr);
+		}
+		// Default
         if(GlobalSettings.messageData) Log.i("MessageData", "stringToColor() - using default color.");
         return Color.BLACK;
+
 	}
 
 	public String colorToString(int color) {
+		if(colorIntStr != null) {
+			return colorIntStr.get(color);
+		}
         
         // Default
         if(GlobalSettings.messageData) Log.i("MessageData", "stringToColor() - using default color.");
