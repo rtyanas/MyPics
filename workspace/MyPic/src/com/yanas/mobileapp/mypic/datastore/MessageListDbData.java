@@ -53,7 +53,7 @@ public class MessageListDbData {
 
 	    values.put(MessageListDbHelper.COLUMN_MESSAGE, messageD.getMessage());
 	    values.put(MessageListDbHelper.COLUMN_MSIZE, messageD.getmSize());
-	    values.put(MessageListDbHelper.COLUMN_MFONT, messageD.getmFont().toString());
+	    values.put(MessageListDbHelper.COLUMN_MFONT, messageD.getmFont());
 	    values.put(MessageListDbHelper.COLUMN_MSTYLE, messageD.getmStyle());
 	    values.put(MessageListDbHelper.COLUMN_MCOLOR, messageD.getmColor());
 	    values.put(MessageListDbHelper.COLUMN_ROTATE, messageD.getRotate());
@@ -69,6 +69,23 @@ public class MessageListDbData {
 //		    cursor.close();
 //	    }
 	    return messageD;
+	  }
+
+	  public int updateMessage(MessageData messageD) {
+		    ContentValues values = new ContentValues();
+
+		    values.put(MessageListDbHelper.COLUMN_MESSAGE, messageD.getMessage());
+		    values.put(MessageListDbHelper.COLUMN_MSIZE, messageD.getmSize());
+		    values.put(MessageListDbHelper.COLUMN_MFONT, messageD.getmFont());
+		    values.put(MessageListDbHelper.COLUMN_MSTYLE, messageD.getmStyle());
+		    values.put(MessageListDbHelper.COLUMN_MCOLOR, messageD.getmColor());
+		    values.put(MessageListDbHelper.COLUMN_ROTATE, messageD.getRotate());
+		    values.put(MessageListDbHelper.COLUMN_PIC, messageD.getPic());
+		    
+		    int insertId = database.update(MessageListDbHelper.TABLE, values, 
+		    		MessageListDbHelper.COLUMN_ID +"="+ messageD.getId(), null);
+		    
+		    return insertId;
 	  }
 
 	  public void deleteStation(MessageData messageD_in) {
@@ -100,7 +117,7 @@ public class MessageListDbData {
 	  }
 
 
-	  public List<MessageData> getAllCityZipData() {
+	  public List<MessageData> getMessageData() {
 	    List<MessageData> comments = new ArrayList<MessageData>();
 
 	    Cursor cursor = database.query(MessageListDbHelper.TABLE,
@@ -118,6 +135,29 @@ public class MessageListDbData {
 	  }
 
 	  
+	  public MessageData getLastMessageData() {
+		    List<MessageData> comments = new ArrayList<MessageData>();
+
+		    Cursor cursor = database.query(MessageListDbHelper.TABLE,
+		        allColumns, null, null, null, null, null);
+
+		    cursor.moveToFirst();
+		    while (!cursor.isAfterLast()) {
+		    	MessageData comment = cursorToMessage(cursor);
+		      comments.add(comment);
+		      cursor.moveToNext();
+		    }
+		    // make sure to close the cursor
+		    cursor.close();
+		    MessageData messData_Ret;
+		    if( comments.size() > 0)
+		    	messData_Ret = comments.get(comments.size() - 1);
+		    else
+		    	messData_Ret = new MessageData(); 
+		    return messData_Ret;
+	  }
+
+		  
 	  public MessageData getMessage(long id_in) {
 		    MessageData mess = new MessageData();
 		    MessageData messReturn = new MessageData();
@@ -141,7 +181,7 @@ public class MessageListDbData {
 		    cursor.close();
 
 		    return messReturn;
-		  }
+	  }
 
 	  private MessageData cursorToMessage(Cursor cursor) {
 		String city, st, zip;  
