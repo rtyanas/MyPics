@@ -83,6 +83,7 @@ public class SettingsActivity extends Activity {
 		spinStyle.setAdapter(adapterS);
 		spinStyle.setOnItemSelectedListener(new StyleOnItemSelectedListener());
 		spinStyle.setSelection(messageD.getmStyle());
+		
 		// Color
 		Spinner spinColor = (Spinner)findViewById(R.id.color);
 		ArrayAdapter<CharSequence> adapterC = ArrayAdapter.createFromResource(this,
@@ -92,6 +93,7 @@ public class SettingsActivity extends Activity {
 		spinColor.setOnItemSelectedListener(new ColorOnItemSelectedListener());
 		pos = ((ArrayAdapter)spinColor.getAdapter()).getPosition(messageD.colorToString(messageD.getmColor()));
 		spinColor.setSelection(pos);
+		
 		// Size
 		Spinner spinSize = (Spinner)findViewById(R.id.size);
 		ArrayAdapter<CharSequence> adapterSz = ArrayAdapter.createFromResource(this,
