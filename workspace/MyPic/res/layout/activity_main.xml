@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="71dp"
             android:contentDescription="@string/my_pic_image"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher_camera" />
     </LinearLayout>
 
     <LinearLayout
