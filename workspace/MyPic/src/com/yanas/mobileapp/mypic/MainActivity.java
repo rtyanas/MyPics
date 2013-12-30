@@ -1,5 +1,8 @@
 package com.yanas.mobileapp.mypic;
 
+import com.yanas.mobileapp.mypic.datastore.MessageListDbData;
+import com.yanas.mobileapp.mypic.datastore.MessageListDbHelper;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -7,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -43,7 +47,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActThis = this;
-        messData = new MessageData();
+        messData = retrieveSettings(); // new MessageData();
         selectedImagePath = "";
         
         // selectedImageUri = null;
@@ -61,7 +65,19 @@ public class MainActivity extends Activity {
         
         setText();
         
-        img = (ImageView)findViewById(R.id.mypic);
+    	img = (ImageView)findViewById(R.id.mypic);
+        if(messData.getPic() != null && messData.getPic().length() > 1) {
+        	img.setImageURI(Uri.parse(messData.getPic()));
+            Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
+            if(bitmap != null) {
+        		Matrix m = img.getImageMatrix();
+        		m.postRotate(messData.getRotate());
+        		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+        				  bitmap.getWidth(), bitmap.getHeight(), m, true);
+        		img.setImageBitmap(bitmap );
+            }
+        }
+        	
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Intent intent = new Intent();
@@ -105,7 +121,10 @@ public class MainActivity extends Activity {
             }
             else if(requestCode == MESSAGE_SETTINGS) {
         		messData = (MessageData)data.getSerializableExtra(MainActivity.MESSAGE);
-            	if(GlobalSettings.mainActivity) {
+        		messData.setPic(selectedImagePath);
+        		saveNewSettings(messData);
+
+        		if(GlobalSettings.mainActivity) {
             		
             		Log.d("MainActivity", "onActivityResult "+ messData);
 //            		Log.d("MainActivity", "onActivityResult"+
@@ -116,8 +135,8 @@ public class MainActivity extends Activity {
 //            				data.getStringExtra(MainActivity.COLOR) +","+
 //            				data.getStringExtra(MainActivity.ROTATE) 
             	}
-            }
-        }
+            } // requestCode == MESSAGE_SETTINGS
+        } // resultCode == RESULT_OK
     }
 
     public String getPath(Uri uri) {
@@ -141,9 +160,12 @@ public class MainActivity extends Activity {
         
     	setText();
         
-        if(selectedImageUri != null)
-        	img.setImageURI(selectedImageUri);
+//        if(selectedImageUri != null)
+//        	img.setImageURI(selectedImageUri);
 
+//        if(selectedImagePath != null)
+//    	  img.setImageURI(Uri.parse(selectedImagePath));
+        
         Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
         if(bitmap != null) {
     		Matrix m = img.getImageMatrix();
@@ -179,4 +201,40 @@ public class MainActivity extends Activity {
         tv.setTypeface(messData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
 
     }
+
+    
+    private void saveNewSettings(MessageData messData_in) {
+		MessageListDbData messListDbData = new MessageListDbData(this);
+
+    	messListDbData.open();
+
+		long numRows = DatabaseUtils.longForQuery(
+				messListDbData.getDatabase(), "SELECT COUNT(*) FROM "+ MessageListDbHelper.TABLE, null);
+    	
+    	if(numRows > 0) {
+        	messListDbData.updateMessage(messData_in);
+    	}
+    	else {
+        	messListDbData.createMessage(messData_in);    		
+    	}
+    	
+    	messListDbData.close();
+    }
+    
+
+    private MessageData retrieveSettings() {
+    	MessageData messg;
+    	MessageListDbData messListDbData = new MessageListDbData(this);
+    	
+    	messListDbData.open();
+    	
+    	messg = messListDbData.getLastMessageData();
+    	
+    	messListDbData.close();
+    	
+    	if(GlobalSettings.mainActivity) Log.d("MainActivity", "retrieveSettings messageData: "+ messg);
+
+    	return messg;
+    }
+
 }
