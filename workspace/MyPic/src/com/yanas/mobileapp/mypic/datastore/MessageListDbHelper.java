@@ -26,7 +26,7 @@ public class MessageListDbHelper  extends SQLiteOpenHelper {
 	      + TABLE + "(" + COLUMN_ID + " integer primary key autoincrement, " + 
 	      COLUMN_MESSAGE + " text not null, " +
 	      COLUMN_MSIZE +  " int, " +
-	      COLUMN_MFONT +  " int, " +
+	      COLUMN_MFONT +  " text, " +
 	      COLUMN_MSTYLE + " int, " +
 	      COLUMN_MCOLOR + " int, " +
 	      COLUMN_ROTATE + " int, " +
