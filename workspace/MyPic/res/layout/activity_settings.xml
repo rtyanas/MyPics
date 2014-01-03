@@ -139,4 +139,12 @@
         
     </LinearLayout>
 
+    <Button
+        android:id="@+id/backGroundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/message_text"
+        android:layout_toRightOf="@+id/done"
+        android:text="@string/background_select" />
+
 </RelativeLayout>
