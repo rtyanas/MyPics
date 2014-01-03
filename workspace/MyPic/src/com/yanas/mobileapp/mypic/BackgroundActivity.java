@@ -75,7 +75,14 @@ public class BackgroundActivity extends Activity {
 					Color.DKGRAY,
 					Color.MAGENTA,
 					Color.TRANSPARENT,
-					Color.YELLOW
+					Color.YELLOW,
+					0xfff00330, 0xfff08230, 0xfff0ef8f,
+					0xfff05244, 0xff0ffdd5, 0xfff0fef0,
+					0xff0099a0, 0xfff00383, 0xfff00120,
+					0xff056380, 0xff608467, 0xff2ae76a,
+					0xffd02232, 0xff005233, 0xff306f60,
+					
+					
 	};
     public void initBackgroundButtonTable(BackgroundLayoutGenerator backgroundLO) {
 
