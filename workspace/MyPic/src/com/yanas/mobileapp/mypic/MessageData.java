@@ -20,6 +20,7 @@ public class MessageData implements Serializable {
 	private int mStyle;
 	private int mColor;
 	private int rotate;
+	private int background;
 
 	private String pic;
 	private HashMap<Integer, String> colorIntStr;
@@ -29,39 +30,40 @@ public class MessageData implements Serializable {
 	public MessageData() {
 		this("You look fabulous", 18, "Sans Serif", 
 				Typeface.ITALIC, Color.BLACK, 
-				0,  "");
+				0,  "", Color.WHITE);
 	}
 	  
 	  
 	public MessageData(	long id_in, String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in, String pic_in) {
+						int rotate_in, String pic_in, int bg_in) {
 		id = id_in;
 		init(	message_in, mSize_in, mFont_in, 
 				mStyle_in, mColor_in, 
-				rotate_in,  pic_in);
+				rotate_in,  pic_in, bg_in);
 	}
 	  
 	  
 	public MessageData(	String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in,  String pic_in) {
+						int rotate_in,  String pic_in, int bg_in) {
 		id = 0;
 		init(	message_in, mSize_in, mFont_in, 
 				mStyle_in, mColor_in, 
-				rotate_in,  pic_in);
+				rotate_in,  pic_in, bg_in);
 	}
 	  
 	  
 	public void init(	String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in,  String pic_in) {
+						int rotate_in,  String pic_in, int bg_in) {
 		message = message_in;
 		mSize = mSize_in;
 		mFont = mFont_in;
 		mStyle = mStyle_in;
 		mColor = mColor_in; 
 		rotate = rotate_in; 
+		background = bg_in; 
 		pic = pic_in;
 		
 		colorIntStr = new HashMap<Integer, String>();
@@ -171,8 +173,18 @@ public class MessageData implements Serializable {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
-	  
-	  
+
+	
+	public int getBackground() {
+		return background;
+	}
+
+
+	public void setBackground(int background) {
+		this.background = background;
+	}
+
+
 	static public Typeface stringToTypeFace(String typeFaceStr) {
 		Typeface typeFaceRet = Typeface.DEFAULT;
 		
