@@ -19,14 +19,17 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
     private static final int SELECT_PICTURE = 1;
     private static final int MESSAGE_SETTINGS = 2;
+    public static final int BACKGROUND_SETTINGS = 3;
     private String selectedImagePath;
     private ImageView img;
     private Button myPicButton;
@@ -41,6 +44,7 @@ public class MainActivity extends Activity {
     public final static String SIZE = "com.yanas.mobileapp.mypic.SIZE";
     public final static String COLOR = "com.yanas.mobileapp.mypic.COLOR";
     public final static String ROTATE = "com.yanas.mobileapp.mypic.ROTATE";
+    public final static String BACKGROUND = "com.yanas.mobileapp.mypic.BACKGROUNDSETTING";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +203,12 @@ public class MainActivity extends Activity {
         tv.setTextSize(messData.getmSize() );
         tv.setTextColor(messData.getmColor());
         tv.setTypeface(messData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
-
+        
+        View vg = (View)findViewById(R.id.main_layout) ;
+        if(vg != null)
+        	vg.setBackgroundColor(messData.getBackground());
+        else
+        	if(GlobalSettings.mainActivity) Log.e("MainActivity", "setText background not set Layout is null");
     }
 
     
