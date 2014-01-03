@@ -31,7 +31,8 @@ public class MessageListDbData {
 			  MessageListDbHelper.COLUMN_MSTYLE,
 			  MessageListDbHelper.COLUMN_MCOLOR,
 			  MessageListDbHelper.COLUMN_ROTATE,
-			  MessageListDbHelper.COLUMN_PIC 
+			  MessageListDbHelper.COLUMN_PIC, 
+			  MessageListDbHelper.COLUMN_BG
 	  };
 
 	  public MessageListDbData(Context context_in) {
@@ -56,6 +57,7 @@ public class MessageListDbData {
 	    values.put(MessageListDbHelper.COLUMN_MFONT, messageD.getmFont());
 	    values.put(MessageListDbHelper.COLUMN_MSTYLE, messageD.getmStyle());
 	    values.put(MessageListDbHelper.COLUMN_MCOLOR, messageD.getmColor());
+	    values.put(MessageListDbHelper.COLUMN_BG, messageD.getBackground());
 	    values.put(MessageListDbHelper.COLUMN_ROTATE, messageD.getRotate());
 	    values.put(MessageListDbHelper.COLUMN_PIC, messageD.getPic());
 	    long insertId = database.insert(MessageListDbHelper.TABLE, null,
@@ -79,6 +81,7 @@ public class MessageListDbData {
 		    values.put(MessageListDbHelper.COLUMN_MFONT, messageD.getmFont());
 		    values.put(MessageListDbHelper.COLUMN_MSTYLE, messageD.getmStyle());
 		    values.put(MessageListDbHelper.COLUMN_MCOLOR, messageD.getmColor());
+		    values.put(MessageListDbHelper.COLUMN_BG, messageD.getBackground());
 		    values.put(MessageListDbHelper.COLUMN_ROTATE, messageD.getRotate());
 		    values.put(MessageListDbHelper.COLUMN_PIC, messageD.getPic());
 		    
@@ -185,14 +188,16 @@ public class MessageListDbData {
 
 	  private MessageData cursorToMessage(Cursor cursor) {
 		String city, st, zip;  
-		MessageData station = new MessageData(Long.parseLong(cursor.getString(0)),
+		MessageData md= new MessageData(Long.parseLong(cursor.getString(0)),
 				 cursor.getString(1), Integer.parseInt(cursor.getString(2)), 
 				 cursor.getString(3), Integer.parseInt(cursor.getString(4)), 
-				 Integer.parseInt(cursor.getString(5)), Integer.parseInt(cursor.getString(6)), 
-				 cursor.getString(7)				 
+				 Integer.parseInt(cursor.getString(5)), 
+				 Integer.parseInt(cursor.getString(6)), 
+				 cursor.getString(7), 
+				 Integer.parseInt(cursor.getString(8))
 				);
 		
-		return station;
+		return md;
 	  }
 
 	public SQLiteDatabase getDatabase() {
