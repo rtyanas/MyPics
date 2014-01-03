@@ -1,8 +1,13 @@
 package com.yanas.mobileapp.mypic;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -17,11 +22,15 @@ import android.widget.TextView;
 public class SettingsActivity extends Activity {
 	
 	MessageData messageD;
+	Context thisSetting;
+	public static final int backgroundSelection = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+		
+		thisSetting = this;
 		
 		messageD = (MessageData)getIntent().getSerializableExtra(MainActivity.MESSAGE);
 		if(messageD == null)
@@ -29,28 +38,31 @@ public class SettingsActivity extends Activity {
 		
 		setupSettingsActivity();
 
-		Button button = (Button)findViewById(R.id.done);
-		button.setOnClickListener(new View.OnClickListener() {
+		Button doneButton = (Button)findViewById(R.id.done);
+		doneButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
 				Intent intent = new Intent();
 				messageD.setMessage(
 						((EditText)findViewById(R.id.message_text)).getText().toString());
 				intent.putExtra(MainActivity.MESSAGE, messageD );
-//				intent.putExtra(MainActivity.MESSAGE, ((TextView)findViewById(R.id.message_text)).getText().toString() );
-//				intent.putExtra(MainActivity.FONT, ((TextView)findViewById(R.id.font)).getText().toString() );
-//				intent.putExtra(MainActivity.STYLE, ((TextView)findViewById(R.id.style)).getText().toString() );
-//				intent.putExtra(MainActivity.SIZE, ((TextView)findViewById(R.id.size)).getText().toString() );
-//				intent.putExtra(MainActivity.COLOR, ((TextView)findViewById(R.id.color)).getText().toString() );
-//				intent.putExtra(MainActivity.ROTATE, ((TextView)findViewById(R.id.rotate)).getText().toString() );
-				
 				setResult(Activity.RESULT_OK, intent);
 								
 				finish();
 			}
 		});
+
+		Button BackGButton = (Button)findViewById(R.id.backGroundButton);
+		BackGButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+                Intent intent = new Intent(thisSetting, BackgroundActivity.class);
+                startActivityForResult(intent, MainActivity.BACKGROUND_SETTINGS);
+			}
+		});
+
 	}
 
 	@Override
@@ -205,5 +217,18 @@ public class SettingsActivity extends Activity {
 		}
 		
 	}
+
+	
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == MainActivity.BACKGROUND_SETTINGS) {
+        		int color = data.getIntExtra(MainActivity.BACKGROUND, backgroundSelection);
+        		if(GlobalSettings.settingsActivity) Log.d("SettingsActivity", "onActivityResult");
+        		messageD.setBackground(color);
+            }
+        }
+
+    }
+
 
 }
