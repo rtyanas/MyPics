@@ -12,4 +12,6 @@ public class GlobalSettings {
 
 	public static boolean messageData = true;
 	
+	public static boolean BackgroundActivity = true;
+
 }
