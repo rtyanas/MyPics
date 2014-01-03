@@ -118,9 +118,10 @@ public class MainActivity extends Activity {
     				bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
     						  bitmap.getWidth(), bitmap.getHeight(), m, true);
     				img.setImageBitmap(bitmap );
-    // breaks              bitmap.recycle();
 
 //                    // img.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath) );                	
+            		messData.setPic(selectedImagePath);
+            		saveNewSettings(messData);
                 }
             }
             else if(requestCode == MESSAGE_SETTINGS) {
