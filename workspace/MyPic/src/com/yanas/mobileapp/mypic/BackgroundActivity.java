@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class BackgroundActivity extends Activity {
 	
-	int rows = 5;
+	int rows = 10;
 	int cols = 5;
 
 	@Override
@@ -53,8 +53,6 @@ public class BackgroundActivity extends Activity {
 		addContentView(mainLayout, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
-
-
 	}
 
 	
@@ -65,23 +63,35 @@ public class BackgroundActivity extends Activity {
 		return true;
 	}
 
-	int colors[] = {Color.BLACK,
-					Color.RED,
-					Color.GREEN,
-					Color.WHITE,
-					Color.BLUE,
-					Color.GRAY,
-					Color.CYAN,
-					Color.DKGRAY,
-					Color.MAGENTA,
-					Color.TRANSPARENT,
-					Color.YELLOW,
-					0xfff00330, 0xfff08230, 0xfff0ef8f,
-					0xfff05244, 0xff0ffdd5, 0xfff0fef0,
-					0xff0099a0, 0xfff00383, 0xfff00120,
-					0xff056380, 0xff608467, 0xff2ae76a,
-					0xffd02232, 0xff005233, 0xff306f60,
-					
+	// Black, grays, light blue, dark blue, dark purple, light purple, light pink, dark pink, 
+	// dark red, light red, dark orange light orange, light yellow, dark yellow, 
+	// light green dark green 
+	// Add grey, blue, orange
+	int colors[] = {
+			Color.BLACK,
+			Color.GRAY,
+			0xff767689, 0xff9C9CB5, // gray
+			Color.DKGRAY,
+			Color.WHITE,
+			Color.BLUE,
+			0xff2B55FA, 0xff1F45DC, 0xff1439CF, // light blue
+			0xff777EF5, 0xff5F66E5, 0xff2C34D0, // light blue 
+			0xff8452FA, 0xff5C28D6, 0xff4319A4, // purple
+			0xffA4197D, 0xffD729A6, 0xffAF1C85, // dark purple
+			Color.MAGENTA,
+			0xffFA7BE7, 0xffF460DE, 0xffE827CB, // light pink
+			0xffFC2529, 0xffC92023, 0xffAF1C1F, // red
+			0xffFF772D, 0xffED671E, 0xffCB510F, // dark orange
+			0xffFB8F2A, 0xffEE7E16, 0xffDB7210, // light orange 
+			Color.YELLOW,
+			0xffEAF42B, 0xffDFDF0F, 0xffC7C709, // light yellow
+			Color.GREEN,
+			0xff2BF46E, 0xff28D562, 0xff1C9D47, // light green
+			0xff278145, 0xff608467, 0xff056380,  // dark green
+			0xff1C9D95, 0xff2CC9BE, 0xff52FAEE, // light blue green
+			// Color.RED,
+			// Color.CYAN,
+			Color.TRANSPARENT,
 					
 	};
     public void initBackgroundButtonTable(BackgroundLayoutGenerator backgroundLO) {
