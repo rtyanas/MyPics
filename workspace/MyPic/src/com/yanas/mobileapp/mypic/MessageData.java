@@ -21,6 +21,7 @@ public class MessageData implements Serializable {
 	private int mColor;
 	private int rotate;
 	private int background;
+	private float textX, textY;
 
 	private String pic;
 	private HashMap<Integer, String> colorIntStr;
@@ -30,33 +31,33 @@ public class MessageData implements Serializable {
 	public MessageData() {
 		this("You look fabulous", 18, "Sans Serif", 
 				Typeface.ITALIC, Color.BLACK, 
-				0,  "", Color.WHITE);
+				0,  "", Color.WHITE, 0.0f, 0.0f);
 	}
 	  
 	  
 	public MessageData(	long id_in, String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in, String pic_in, int bg_in) {
+						int rotate_in, String pic_in, int bg_in, float textX, float textY) {
 		id = id_in;
 		init(	message_in, mSize_in, mFont_in, 
 				mStyle_in, mColor_in, 
-				rotate_in,  pic_in, bg_in);
+				rotate_in,  pic_in, bg_in, textX, textY);
 	}
 	  
 	  
 	public MessageData(	String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in,  String pic_in, int bg_in) {
+						int rotate_in,  String pic_in, int bg_in, float textX, float textY) {
 		id = 0;
 		init(	message_in, mSize_in, mFont_in, 
 				mStyle_in, mColor_in, 
-				rotate_in,  pic_in, bg_in);
+				rotate_in,  pic_in, bg_in, textX, textY);
 	}
 	  
 	  
 	public void init(	String message_in, int mSize_in, String mFont_in, 
 						int mStyle_in, int mColor_in, 
-						int rotate_in,  String pic_in, int bg_in) {
+						int rotate_in,  String pic_in, int bg_in, float textX_in, float textY_in) {
 		message = message_in;
 		mSize = mSize_in;
 		mFont = mFont_in;
@@ -64,6 +65,9 @@ public class MessageData implements Serializable {
 		mColor = mColor_in; 
 		rotate = rotate_in; 
 		background = bg_in; 
+		textX = textX_in;
+		textY = textY_in;
+		
 		pic = pic_in;
 		
 		colorIntStr = new HashMap<Integer, String>();
@@ -185,6 +189,26 @@ public class MessageData implements Serializable {
 	}
 
 
+	public float getTextX() {
+		return textX;
+	}
+
+
+	public void setTextX(float textX) {
+		this.textX = textX;
+	}
+
+
+	public float getTextY() {
+		return textY;
+	}
+
+
+	public void setTextY(float textY) {
+		this.textY = textY;
+	}
+
+
 	static public Typeface stringToTypeFace(String typeFaceStr) {
 		Typeface typeFaceRet = Typeface.DEFAULT;
 		
@@ -236,6 +260,7 @@ public class MessageData implements Serializable {
 				", Font:"+ mFont +
 				", Style:"+ mStyle +
 				", Color:"+ mColor +
+				", X:"+ textX + ", Y:"+textY +
 				", Rotate:"+ rotate +
 				", Pic:"+ pic;
 
