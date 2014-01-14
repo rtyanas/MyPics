@@ -26,10 +26,10 @@ public class MessageData implements Serializable {
 	private String pic;
 	private HashMap<Integer, String> colorIntStr;
 	private HashMap<String, Integer> colorStrInt;
+	static String DEFAULT_MESSAGE = "default message";
 
-	
 	public MessageData() {
-		this("You look fabulous", 18, "Sans Serif", 
+		this(DEFAULT_MESSAGE, 18, "Sans Serif", 
 				Typeface.ITALIC, Color.BLACK, 
 				0,  "", Color.WHITE, 0.0f, 0.0f);
 	}
