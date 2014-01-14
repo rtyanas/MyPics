@@ -75,7 +75,6 @@ public class MainActivity extends Activity {
     	// TextView tv = (TextView)findViewById(R.id.message_data);
     	tv = new TextView(this);
     	RelativeLayout vg = (RelativeLayout)findViewById(R.id.main_layout) ;
-        vg.addView(tv);
 
         tv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
@@ -118,10 +117,13 @@ public class MainActivity extends Activity {
 
         		    }
         		} );
-        tv.setOnDragListener(new myDragEventListener() );
+
         setText();
         
-    	img = (ImageView)findViewById(R.id.mypic);
+        vg.setOnDragListener(new myDragEventListener() );
+        vg.addView(tv);
+
+        img = (ImageView)findViewById(R.id.mypic);
         if(messData.getPic() != null && messData.getPic().length() > 1) {
         	img.setImageURI(Uri.parse(messData.getPic()));
             Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
