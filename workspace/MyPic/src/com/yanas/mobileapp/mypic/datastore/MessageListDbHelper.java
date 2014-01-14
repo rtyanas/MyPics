@@ -22,7 +22,7 @@ public class MessageListDbHelper  extends SQLiteOpenHelper {
 	  public static final String COLUMN_PIC = "pic";
 
 	  private static final String DATABASE_NAME = "messages.db";
-	  private static final int DATABASE_VERSION = 4;
+	  private static final int DATABASE_VERSION = 5;
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE = "create table "
@@ -33,8 +33,8 @@ public class MessageListDbHelper  extends SQLiteOpenHelper {
 	      COLUMN_MSTYLE + " int, " +
 	      COLUMN_MCOLOR + " int, " +
 	      COLUMN_BG + " int, " +
-		  COLUMN_TEXT_X + " int, " +
-		  COLUMN_TEXT_Y + " int, " +
+		  COLUMN_TEXT_X + " float, " +
+		  COLUMN_TEXT_Y + " float, " +
 	      COLUMN_ROTATE + " int, " +
 	      COLUMN_PIC + " text " +
 	      ");";
