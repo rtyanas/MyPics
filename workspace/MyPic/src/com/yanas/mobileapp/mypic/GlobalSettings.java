@@ -2,16 +2,18 @@ package com.yanas.mobileapp.mypic;
 
 public class GlobalSettings {
 
-	public static boolean mainActivity = true;
+	static boolean allSettings = false;
+	
+	public static boolean mainActivity = allSettings;
 
-	public static boolean dataStore = true;
+	public static boolean dataStore = allSettings;
 	
-	public static boolean getImageActivity = true;
+	public static boolean getImageActivity = allSettings;
 	
-	public static boolean settingsActivity = true;
+	public static boolean settingsActivity = allSettings;
 
-	public static boolean messageData = true;
+	public static boolean messageData = allSettings;
 	
-	public static boolean BackgroundActivity = true;
+	public static boolean backgroundActivity = allSettings;
 
 }
