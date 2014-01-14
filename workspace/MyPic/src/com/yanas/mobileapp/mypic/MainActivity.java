@@ -267,7 +267,13 @@ public class MainActivity extends Activity {
     @SuppressLint("NewApi")
 	private void setText() {
     	// TextView tv = (TextView)findViewById(R.id.message_data);
-    	tv.setText(messData.getMessage());
+    	String textData = messData.getMessage();
+    	
+    	if(textData.equals(MessageData.DEFAULT_MESSAGE)) {
+    		textData = getString(R.string.fabulous);
+    	}
+
+    	tv.setText(textData);
         tv.setTextSize(messData.getmSize() );
         tv.setTextColor(messData.getmColor());
         tv.setTypeface(messData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
