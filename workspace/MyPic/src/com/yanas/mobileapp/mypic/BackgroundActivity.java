@@ -29,7 +29,7 @@ public class BackgroundActivity extends Activity {
 	    LinearLayout mainLayout = new LinearLayout(this);
 	    mainLayout.setOrientation(LinearLayout.VERTICAL);
 
-		if(GlobalSettings.BackgroundActivity) Log.d("BackgroundActivity", "onCreate ");
+		if(GlobalSettings.backgroundActivity) Log.d("BackgroundActivity", "onCreate ");
 	    TextView backgroundText = new TextView(this);
 	    backgroundText.setText("Select Background" );
 	    
