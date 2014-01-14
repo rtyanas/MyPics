@@ -28,38 +28,38 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int default_image=0x7f020000;
         public static final int ic_launcher_camera=0x7f020001;
         public static final int ic_launcher_richeall=0x7f020002;
-        public static final int text_icon=0x7f020003;
+        public static final int sandyhook_panorama_icon=0x7f020003;
+        public static final int text_icon=0x7f020004;
     }
     public static final class id {
         public static final int Button01=0x7f090000;
         public static final int ImageView01=0x7f090001;
-        public static final int action_settings=0x7f090018;
-        public static final int action_settings_menu_item=0x7f090019;
-        public static final int backGroundButton=0x7f090017;
-        public static final int color=0x7f090010;
-        public static final int done=0x7f090009;
-        public static final int font=0x7f09000b;
-        public static final int linearLayout1=0x7f090005;
-        public static final int linearLayout2=0x7f090003;
-        public static final int linearLayout3=0x7f09000e;
-        public static final int linearLayout4=0x7f090011;
-        public static final int linearLayout5=0x7f090014;
+        public static final int action_settings=0x7f090017;
+        public static final int action_settings_menu_item=0x7f090018;
+        public static final int backGroundButton=0x7f090016;
+        public static final int color=0x7f09000f;
+        public static final int done=0x7f090006;
+        public static final int font=0x7f090009;
+        public static final int linearLayout1=0x7f090007;
+        public static final int linearLayout2=0x7f09000a;
+        public static final int linearLayout3=0x7f09000d;
+        public static final int linearLayout4=0x7f090010;
+        public static final int linearLayout5=0x7f090013;
         public static final int main_layout=0x7f090002;
-        public static final int message_data=0x7f090006;
-        public static final int message_lo=0x7f090007;
-        public static final int message_text=0x7f090008;
-        public static final int mypic=0x7f090004;
-        public static final int rotate=0x7f090016;
-        public static final int size=0x7f090013;
-        public static final int style=0x7f09000d;
-        public static final int textView1=0x7f09000c;
-        public static final int textView2=0x7f09000a;
-        public static final int textView3=0x7f09000f;
-        public static final int textView4=0x7f090012;
-        public static final int textView5=0x7f090015;
+        public static final int message_lo=0x7f090004;
+        public static final int message_text=0x7f090005;
+        public static final int mypic=0x7f090003;
+        public static final int rotate=0x7f090015;
+        public static final int size=0x7f090012;
+        public static final int style=0x7f09000c;
+        public static final int textView1=0x7f09000b;
+        public static final int textView2=0x7f090008;
+        public static final int textView3=0x7f09000e;
+        public static final int textView4=0x7f090011;
+        public static final int textView5=0x7f090014;
     }
     public static final class layout {
         public static final int activity_background=0x7f030000;
