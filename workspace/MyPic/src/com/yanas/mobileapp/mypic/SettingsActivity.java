@@ -23,6 +23,7 @@ public class SettingsActivity extends Activity {
 	
 	MessageData messageD;
 	Context thisSetting;
+	String textData;
 	public static final int backgroundSelection = 0;
 
 	@Override
@@ -36,6 +37,12 @@ public class SettingsActivity extends Activity {
 		if(messageD == null)
 			messageD = new MessageData();
 		
+    	textData = messageD.getMessage();
+    	
+    	if(textData.equals(MessageData.DEFAULT_MESSAGE)) {
+    		textData = getString(R.string.fabulous);
+    	}
+
 		setupSettingsActivity();
 
 		Button doneButton = (Button)findViewById(R.id.done);
@@ -76,7 +83,7 @@ public class SettingsActivity extends Activity {
 		int pos=0;
 		
 		EditText et = (EditText)findViewById(R.id.message_text);
-		et.setText(messageD.getMessage());
+		et.setText(textData);
 		
 		// Font
 		Spinner spinFont = (Spinner)findViewById(R.id.font);
