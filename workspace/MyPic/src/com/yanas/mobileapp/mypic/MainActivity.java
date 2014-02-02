@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mainActThis = this;
         messData = retrieveSettings(); // new MessageData();
-        selectedImagePath = "";
+        selectedImagePath = messData.getPic();
         // messageTV = new TextView(this);
         
         // selectedImageUri = null;
@@ -237,7 +237,7 @@ public class MainActivity extends Activity {
 //        if(selectedImagePath != null)
 //    	  img.setImageURI(Uri.parse(selectedImagePath));
         
-        Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
+        Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
         if(bitmap != null) {
     		Matrix m = img.getImageMatrix();
     		m.postRotate(messData.getRotate());
