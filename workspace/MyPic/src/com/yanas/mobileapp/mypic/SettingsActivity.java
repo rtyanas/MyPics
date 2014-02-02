@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Menu;
@@ -61,6 +62,7 @@ public class SettingsActivity extends Activity {
 		});
 
 		Button BackGButton = (Button)findViewById(R.id.backGroundButton);
+		BackGButton.setBackgroundColor(messageD.getBackground());
 		BackGButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -77,6 +79,42 @@ public class SettingsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.settings, menu);
 		return true;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		Button BackGButton = (Button)findViewById(R.id.backGroundButton);
+		BackGButton.setBackgroundColor(messageD.getBackground());
+		
+		int bg = messageD.getBackground();
+		
+		double y = (299 * (redVal(bg) ) + 587 * greenVal(bg) + 114 * blueVal(bg)) / 1000;
+		
+		BackGButton.setTextColor(y >= 128 ? Color.BLACK : Color.WHITE);
+
+	}
+	
+	int redVal(int background) {
+		int redValRet = 0;
+		redValRet = (background >> 16) & Integer.parseInt("0000000011111111", 2);
+		if(GlobalSettings.settingsActivity) Log.d("SettingsActivity", "redVal: "+ Integer.toHexString(redValRet));
+		return redValRet;
+	}
+	
+	int greenVal(int background) {
+		int greenValRet = 0;
+		greenValRet = (background >> 8) & Integer.parseInt("0000000011111111", 2);
+		if(GlobalSettings.settingsActivity) Log.d("SettingsActivity", "greenVal: "+ Integer.toHexString(greenValRet));
+		return greenValRet;
+	}
+	
+	int blueVal(int background) {
+		int blueValRet = 0;		
+		blueValRet = background & Integer.parseInt("000000000000000011111111", 2);
+		if(GlobalSettings.settingsActivity) Log.d("SettingsActivity", "blueVal: "+ Integer.toHexString(blueValRet));
+		return blueValRet;
 	}
 	
 	private void setupSettingsActivity() {
