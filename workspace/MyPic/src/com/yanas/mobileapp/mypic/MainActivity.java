@@ -124,18 +124,6 @@ public class MainActivity extends Activity {
         vg.addView(tv);
 
         img = (ImageView)findViewById(R.id.mypic);
-        if(messData.getPic() != null && messData.getPic().length() > 1) {
-        	img.setImageURI(Uri.parse(messData.getPic()));
-            Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
-            if(bitmap != null) {
-        		Matrix m = img.getImageMatrix();
-        		m.postRotate(messData.getRotate());
-        		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-        				  bitmap.getWidth(), bitmap.getHeight(), m, true);
-        		img.setImageBitmap(bitmap );
-            }
-        }
-        	
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Intent intent = new Intent();
@@ -144,7 +132,8 @@ public class MainActivity extends Activity {
                 startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
             }
         });
-
+        
+        setPic();
     }
 
 
@@ -182,7 +171,8 @@ public class MainActivity extends Activity {
         		messData = (MessageData)data.getSerializableExtra(MainActivity.MESSAGE);
         		messData.setPic(selectedImagePath);
         		saveNewSettings(messData);
-
+        		setText();
+        		
         		if(GlobalSettings.mainActivity) {
             		
             		Log.d("MainActivity", "onActivityResult "+ messData);
@@ -237,17 +227,8 @@ public class MainActivity extends Activity {
 //        if(selectedImagePath != null)
 //    	  img.setImageURI(Uri.parse(selectedImagePath));
         
-        Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
-        if(bitmap != null) {
-    		Matrix m = img.getImageMatrix();
-    		m.postRotate(messData.getRotate());
-    		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-    				  bitmap.getWidth(), bitmap.getHeight(), m, true);
-    		img.setImageBitmap(bitmap );
-    //breaks              bitmap.recycle();
-
-//            // img.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath) );        	
-        }
+    	setPic();
+    	
     }
     
 
@@ -287,6 +268,26 @@ public class MainActivity extends Activity {
         else
         	if(GlobalSettings.mainActivity) Log.e("MainActivity", "setText background not set Layout is null");
     }
+
+    private void setPic() {
+        if(messData.getPic() != null) {
+        	if( messData.getPic().length() > 1) {
+            	img.setImageURI(Uri.parse(messData.getPic()));
+                Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
+                if(bitmap != null) {
+            		Matrix m = img.getImageMatrix();
+            		m.postRotate(messData.getRotate());
+            		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+            				  bitmap.getWidth(), bitmap.getHeight(), m, true);
+            		img.setImageBitmap(bitmap );
+                }
+        	}
+        	else { // messData.getPic().length() <= 1
+        		img.setBackgroundResource(R.drawable.default_image);
+        	}
+        }
+    }
+    
     
     private void startSettingsActivity() {
         Intent intent = new Intent(mainActThis, SettingsActivity.class);
