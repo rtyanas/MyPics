@@ -61,5 +61,6 @@
     <string name="rotate_label">Rotate:</string>
     <string name="title_activity_background">BackgroundActivity</string>
     <string name="background_select">Select A Background</string>
+    <string name="help_menu_String">Help</string>
 
 </resources>
