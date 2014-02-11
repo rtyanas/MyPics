@@ -11,6 +11,9 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -20,7 +23,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -28,7 +30,6 @@ import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,8 +43,6 @@ public class MainActivity extends Activity {
     public static final int BACKGROUND_SETTINGS = 3;
     private String selectedImagePath;
     private ImageView img;
-    private Button myPicButton;
-    private Uri selectedImageUri = null;
     private MainActivity mainActThis;
 	MessageData messData;
 	private static final String TEXT_TAG = "text_message";
@@ -210,7 +209,26 @@ public class MainActivity extends Activity {
             case R.id.action_settings_menu_item:
             	startSettingsActivity();
                 return true;
+            case R.id.help_menu_item:
+				PackageInfo pInfo;
+				String version = "";
+				try {
+					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+					version = pInfo.versionName;
+					
+				} catch (NameNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	
+				
+				Toast t = Toast.makeText(this, version +
+						", Android release: "+ android.os.Build.VERSION.RELEASE, Toast.LENGTH_LONG);
+            	t.show();
+                return true;
             default:
+            	Toast d = Toast.makeText(this, "Default menu", Toast.LENGTH_LONG);
+            	d.show();
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -257,7 +275,7 @@ public class MainActivity extends Activity {
     	tv.setText(textData);
         tv.setTextSize(messData.getmSize() );
         tv.setTextColor(messData.getmColor());
-        tv.setTypeface(messData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
+        tv.setTypeface(MessageData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
 
         tv.setX(messData.getTextX());
         tv.setY(messData.getTextY());
@@ -283,7 +301,7 @@ public class MainActivity extends Activity {
                 }
         	}
         	else { // messData.getPic().length() <= 1
-        		img.setBackgroundResource(R.drawable.default_image);
+        		img.setImageResource(R.drawable.default_image);
         	}
         }
     }
