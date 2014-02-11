@@ -43,6 +43,7 @@ public final class R {
         public static final int color=0x7f09000f;
         public static final int done=0x7f090006;
         public static final int font=0x7f090009;
+        public static final int help_menu_item=0x7f090019;
         public static final int linearLayout1=0x7f090007;
         public static final int linearLayout2=0x7f09000a;
         public static final int linearLayout3=0x7f09000d;
@@ -83,6 +84,7 @@ public final class R {
         public static final int font=0x7f05000a;
         public static final int get_image=0x7f050005;
         public static final int hello_world=0x7f050002;
+        public static final int help_menu_String=0x7f050011;
         public static final int init_text=0x7f050008;
         public static final int my_pic_image=0x7f050004;
         public static final int rotate_label=0x7f05000e;
