@@ -10,4 +10,10 @@
         <!--
         android:onClick="@string/action_settings"  
         android:showAsAction="never"  -->
+        
+    <item android:id="@+id/help_menu_item" 
+		android:showAsAction="ifRoom"
+        android:title="@string/help_menu_String">
+        
+    </item>
 </menu>
