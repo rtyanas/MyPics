@@ -31,7 +31,7 @@ public class MessageData implements Serializable {
 	public MessageData() {
 		this(DEFAULT_MESSAGE, 18, "Sans Serif", 
 				Typeface.ITALIC, Color.BLACK, 
-				0,  "", Color.LTGRAY, 100.0f, 50.0f);
+				0,  "", Color.LTGRAY, 50.0f, 100.0f);
 	}
 	  
 	  
