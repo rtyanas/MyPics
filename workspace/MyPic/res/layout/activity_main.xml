@@ -18,6 +18,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="105dp"
         android:contentDescription="@string/my_pic_image"
-        android:src="@drawable/default_image" />
-
+        />
+    
+    <!-- android:src="@drawable/default_image"  --> 
+    
 </RelativeLayout>
