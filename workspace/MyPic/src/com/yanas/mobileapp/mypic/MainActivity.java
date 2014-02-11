@@ -221,9 +221,9 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
             	
-				
-				Toast t = Toast.makeText(this, version +
-						", Android release: "+ android.os.Build.VERSION.RELEASE, Toast.LENGTH_LONG);
+				String helpInfo = version + ", Android release: "+ android.os.Build.VERSION.RELEASE +
+						"\nCHange picture by selecting image.  \nMove text by using long click.";
+				Toast t = Toast.makeText(this, helpInfo, Toast.LENGTH_LONG);
             	t.show();
                 return true;
             default:
