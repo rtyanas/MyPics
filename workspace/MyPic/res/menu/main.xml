@@ -5,7 +5,12 @@
         android:orderInCategory="100"
 		android:showAsAction="ifRoom"
         android:title="@string/action_settings" 
-        />
+        >
+        <menu>
+            <item android:id="@+id/setting_menu_item" android:title="@string/title_activity_settings" android:showAsAction="ifRoom"/>
+            <item android:id="@+id/wallpaper_item" android:title="@string/wallpaper_menu_item"/>
+        </menu>
+    </item>
         
         <!--
         android:onClick="@string/action_settings"  
@@ -14,6 +19,10 @@
     <item android:id="@+id/help_menu_item" 
 		android:showAsAction="ifRoom"
         android:title="@string/help_menu_String">
+        <menu>
+            <item android:id="@+id/tips_menu_item" android:title="@string/tips_help_menu" android:showAsAction="ifRoom"/>
+            <item android:id="@+id/version_menu_item" android:title="@string/version_menu_item" android:showAsAction="ifRoom"/>
+        </menu>
         
     </item>
 </menu>
