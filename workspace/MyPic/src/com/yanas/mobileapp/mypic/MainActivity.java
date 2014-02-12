@@ -1,5 +1,7 @@
 package com.yanas.mobileapp.mypic;
 
+import java.io.IOException;
+
 import com.yanas.mobileapp.mypic.datastore.MessageListDbData;
 import com.yanas.mobileapp.mypic.datastore.MessageListDbHelper;
 
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -204,12 +207,47 @@ public class MainActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+    	String helpInfo;
+    	Toast t;
+    	String wallPaperError = "Error, wallpaper not set";
+    	// Handle item selection    	
         switch (item.getItemId()) {
-            case R.id.action_settings_menu_item:
-            	startSettingsActivity();
+        case R.id.wallpaper_item:
+            WallpaperManager myWallpaperManager
+            = WallpaperManager.getInstance(getApplicationContext());
+            try {
+                if(messData.getPic() != null) {
+                	if( messData.getPic().length() > 1) {
+                    	img.setImageURI(Uri.parse(messData.getPic()));
+                        Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
+                        if(bitmap != null) {
+                    		Matrix m = img.getImageMatrix();
+                    		m.postRotate(messData.getRotate());
+                    		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                    				  bitmap.getWidth(), bitmap.getHeight(), m, true);
+                            myWallpaperManager.setBitmap(bitmap);
+                        }
+                	}
+                	else { // messData.getPic().length() <= 1
+                		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
+                		tw.show();
+                	}
+                }
+            } catch (IOException e) {
+        		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
+        		tw.show();
+            }
+            return true;
+        case R.id.setting_menu_item:
+        		startSettingsActivity();
+                
                 return true;
-            case R.id.help_menu_item:
+            case R.id.tips_menu_item:
+				helpInfo = "Change picture by selecting image.  \nMove text by using long click.";
+				t = Toast.makeText(this, helpInfo, Toast.LENGTH_LONG);
+            	t.show();
+                return true;
+            case R.id.version_menu_item:
 				PackageInfo pInfo;
 				String version = "";
 				try {
@@ -221,14 +259,13 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
             	
-				String helpInfo = version + ", Android release: "+ android.os.Build.VERSION.RELEASE +
-						"\nCHange picture by selecting image.  \nMove text by using long click.";
-				Toast t = Toast.makeText(this, helpInfo, Toast.LENGTH_LONG);
+				helpInfo = version + ", Android release: "+ android.os.Build.VERSION.RELEASE;
+				t = Toast.makeText(this, helpInfo, Toast.LENGTH_LONG);
             	t.show();
                 return true;
             default:
-            	Toast d = Toast.makeText(this, "Default menu", Toast.LENGTH_LONG);
-            	d.show();
+//            	Toast d = Toast.makeText(this, "Default menu", Toast.LENGTH_LONG);
+//            	d.show();
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -298,6 +335,12 @@ public class MainActivity extends Activity {
             		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
             				  bitmap.getWidth(), bitmap.getHeight(), m, true);
             		img.setImageBitmap(bitmap );
+                }
+                else {
+                	if(GlobalSettings.mainActivity) {
+                    	Toast t = Toast.makeText(this, "Error showing pic, bitmap is null.", Toast.LENGTH_LONG);
+                    	t.show();
+                	}
                 }
         	}
         	else { // messData.getPic().length() <= 1
