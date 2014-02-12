@@ -62,5 +62,8 @@
     <string name="title_activity_background">BackgroundActivity</string>
     <string name="background_select">Select A Background</string>
     <string name="help_menu_String">Help</string>
+    <string name="tips_help_menu">Tips</string>
+    <string name="version_menu_item">Version</string>
+    <string name="wallpaper_menu_item">Use This As Wallpaper</string>
 
 </resources>
