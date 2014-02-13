@@ -215,28 +215,44 @@ public class MainActivity extends Activity {
         case R.id.wallpaper_item:
             WallpaperManager myWallpaperManager
             = WallpaperManager.getInstance(getApplicationContext());
+
+            Bitmap bitmap;
+        	View v1 = img.getRootView();
+        	v1.setDrawingCacheEnabled(true);
+        	bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+        	v1.setDrawingCacheEnabled(false);
             try {
-                if(messData.getPic() != null) {
-                	if( messData.getPic().length() > 1) {
-                    	img.setImageURI(Uri.parse(messData.getPic()));
-                        Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
-                        if(bitmap != null) {
-                    		Matrix m = img.getImageMatrix();
-                    		m.postRotate(messData.getRotate());
-                    		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                    				  bitmap.getWidth(), bitmap.getHeight(), m, true);
-                            myWallpaperManager.setBitmap(bitmap);
-                        }
-                	}
-                	else { // messData.getPic().length() <= 1
-                		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
-                		tw.show();
-                	}
-                }
-            } catch (IOException e) {
-        		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
-        		tw.show();
-            }
+				myWallpaperManager.setBitmap(bitmap);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+//        	try {
+//            	// create bitmap screen capture
+//
+//                if(messData.getPic() != null) {
+//                	if( messData.getPic().length() > 1) {
+//                    	img.setImageURI(Uri.parse(messData.getPic()));
+//                        Bitmap bitmap = BitmapFactory.decodeFile(messData.getPic());
+//                        if(bitmap != null) {
+//                    		Matrix m = img.getImageMatrix();
+//                    		m.postRotate(messData.getRotate());
+//                    		bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+//                    				  bitmap.getWidth(), bitmap.getHeight(), m, true);
+//                            myWallpaperManager.setBitmap(bitmap);
+//                        }
+//                        
+//                	}
+//                	else { // messData.getPic().length() <= 1
+//                		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
+//                		tw.show();
+//                	}
+//                }
+//            } catch (IOException e) {
+//        		Toast tw = Toast.makeText(this, wallPaperError, Toast.LENGTH_LONG);
+//        		tw.show();
+//            }
             return true;
         case R.id.setting_menu_item:
         		startSettingsActivity();
