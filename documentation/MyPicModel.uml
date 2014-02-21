@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_HOQeEJsUEeO7TeLUrukWTQ" name="Model">
+  <ownedComment xmi:type="uml:Comment" xmi:id="_eOFKoJsmEeO7TeLUrukWTQ">
+    <body>Use the current screen as wallpaper &#xD;
+including picture and text</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_Aw2bIJsnEeO7TeLUrukWTQ">
+    <body>User can go to Gallery&#xD;
+for selecting any photo &#xD;
+to be on the MyPic screen&#xD;
+</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_la_AwJsnEeO7TeLUrukWTQ">
+    <body>User has ability to change text size and color,&#xD;
+background color and text characters</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_xm8AQJsnEeO7TeLUrukWTQ">
+    <body>Text may be at any prefered&#xD;
+ user location</body>
+  </ownedComment>
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_HOQeEZsUEeO7TeLUrukWTQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="__jeT8JskEeO7TeLUrukWTQ" name="User"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_VDSrgJslEeO7TeLUrukWTQ" name="Tap Picture"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_bPmcwJslEeO7TeLUrukWTQ" name="Tap text"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_eFTekJslEeO7TeLUrukWTQ" name="Long click text"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_lu9-oJslEeO7TeLUrukWTQ" name="Drag text"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pxFJMJslEeO7TeLUrukWTQ" name="A_user_long click text" memberEnd="_pxFJMZslEeO7TeLUrukWTQ _pxFJNJslEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_pxFJMZslEeO7TeLUrukWTQ" name="user" type="__jeT8JskEeO7TeLUrukWTQ" association="_pxFJMJslEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pxFJMpslEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pxFJM5slEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_pxFJNJslEeO7TeLUrukWTQ" name="long click text" type="_eFTekJslEeO7TeLUrukWTQ" association="_pxFJMJslEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pxFJNZslEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pxFJNpslEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_sU5w0JslEeO7TeLUrukWTQ" name="A_long click text_drag text to user location" memberEnd="_sU5w0ZslEeO7TeLUrukWTQ _sU5w1JslEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_sU5w0ZslEeO7TeLUrukWTQ" name="long click text" type="_eFTekJslEeO7TeLUrukWTQ" association="_sU5w0JslEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sU5w0pslEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sU5w05slEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_sU5w1JslEeO7TeLUrukWTQ" name="drag text to user location" type="_lu9-oJslEeO7TeLUrukWTQ" association="_sU5w0JslEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sU5w1ZslEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sU5w1pslEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_uCLyAJslEeO7TeLUrukWTQ" name="Help menu option"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_26--sJslEeO7TeLUrukWTQ" name="Settings menu option"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_F0wPUJsmEeO7TeLUrukWTQ" name="Changing picture andTips on dragging text "/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_RZOYEJsmEeO7TeLUrukWTQ" name="Version of app and android device"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_XywtAJsmEeO7TeLUrukWTQ" name="Display User Options"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_YX5aYJsmEeO7TeLUrukWTQ" name="Use this picture as wallpaper"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_2AYiMJsmEeO7TeLUrukWTQ" name="Change current picture"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_4QzFoJsmEeO7TeLUrukWTQ" name="A_user_tap picture" memberEnd="_4QzFoZsmEeO7TeLUrukWTQ _4QzFpJsmEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4QzFoZsmEeO7TeLUrukWTQ" name="user" type="__jeT8JskEeO7TeLUrukWTQ" association="_4QzFoJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4QzFopsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4QzFo5smEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4QzFpJsmEeO7TeLUrukWTQ" name="tap picture" type="_VDSrgJslEeO7TeLUrukWTQ" association="_4QzFoJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4QzFpZsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4QzFppsmEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_40WeoJsmEeO7TeLUrukWTQ" name="A_tap picture_change current picture" memberEnd="_40WeoZsmEeO7TeLUrukWTQ _40WepJsmEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_40WeoZsmEeO7TeLUrukWTQ" name="tap picture" type="_VDSrgJslEeO7TeLUrukWTQ" association="_40WeoJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_40WeopsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_40Weo5smEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_40WepJsmEeO7TeLUrukWTQ" name="change current picture" type="_2AYiMJsmEeO7TeLUrukWTQ" association="_40WeoJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_40WepZsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_40WeppsmEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_8hYxEJsmEeO7TeLUrukWTQ" name="Select Gallery"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_-c1xIJsmEeO7TeLUrukWTQ" name="A_change current picture_select gallery" memberEnd="_-c1xIZsmEeO7TeLUrukWTQ _-c1xJJsmEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_-c1xIZsmEeO7TeLUrukWTQ" name="change current picture" type="_2AYiMJsmEeO7TeLUrukWTQ" association="_-c1xIJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-c1xIpsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-c1xI5smEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_-c1xJJsmEeO7TeLUrukWTQ" name="select gallery" type="_8hYxEJsmEeO7TeLUrukWTQ" association="_-c1xIJsmEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-c1xJZsmEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-c1xJpsmEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UrXBwJsnEeO7TeLUrukWTQ" name="A_user_settings menu option" memberEnd="_UrXBwZsnEeO7TeLUrukWTQ _UrXBxJsnEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_UrXBwZsnEeO7TeLUrukWTQ" name="user" type="__jeT8JskEeO7TeLUrukWTQ" association="_UrXBwJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UrXBwpsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UrXBw5snEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_UrXBxJsnEeO7TeLUrukWTQ" name="settings menu option" type="_26--sJslEeO7TeLUrukWTQ" association="_UrXBwJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UrXBxZsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UrXBxpsnEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VTicEJsnEeO7TeLUrukWTQ" name="A_user_tap text" memberEnd="_VTicEZsnEeO7TeLUrukWTQ _VTicFJsnEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VTicEZsnEeO7TeLUrukWTQ" name="user" type="__jeT8JskEeO7TeLUrukWTQ" association="_VTicEJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VTicEpsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VTicE5snEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VTicFJsnEeO7TeLUrukWTQ" name="tap text" type="_bPmcwJslEeO7TeLUrukWTQ" association="_VTicEJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VTicFZsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VTicFpsnEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_oIl2gJsnEeO7TeLUrukWTQ" name="A_tap text_display user options" memberEnd="_oIl2gZsnEeO7TeLUrukWTQ _oIl2hJsnEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_oIl2gZsnEeO7TeLUrukWTQ" name="tap text" type="_bPmcwJslEeO7TeLUrukWTQ" association="_oIl2gJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oIl2gpsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oIl2g5snEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_oIl2hJsnEeO7TeLUrukWTQ" name="display user options" type="_XywtAJsmEeO7TeLUrukWTQ" association="_oIl2gJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oIl2hZsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oIl2hpsnEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_olrbIJsnEeO7TeLUrukWTQ" name="A_settings menu option_display user options" memberEnd="_olrbIZsnEeO7TeLUrukWTQ _olrbJJsnEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_olrbIZsnEeO7TeLUrukWTQ" name="settings menu option" type="_26--sJslEeO7TeLUrukWTQ" association="_olrbIJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_olrbIpsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_olrbI5snEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_olrbJJsnEeO7TeLUrukWTQ" name="display user options" type="_XywtAJsmEeO7TeLUrukWTQ" association="_olrbIJsnEeO7TeLUrukWTQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_olrbJZsnEeO7TeLUrukWTQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_olrbJpsnEeO7TeLUrukWTQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
