@@ -105,7 +105,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lvIWspslEeO7TeLUrukWTQ"/>
       </children>
       <element xmi:type="uml:UseCase" href="MyPicModel.uml#_lu9-oJslEeO7TeLUrukWTQ"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lvBpAZslEeO7TeLUrukWTQ" x="300" y="108"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lvBpAZslEeO7TeLUrukWTQ" x="324" y="108"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_uCQDcJslEeO7TeLUrukWTQ" type="2013" fontName="Segoe UI" lineColor="0">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_uCQqgJslEeO7TeLUrukWTQ" source="ShadowFigure">
