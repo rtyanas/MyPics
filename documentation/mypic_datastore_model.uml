@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_1qKGYJ5OEeOVucdCGm9gFw" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_X-iVkJ5PEeOVucdCGm9gFw" name="MessageListDbData">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_k8Me0J5PEeOVucdCGm9gFw" name="allColumns" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lU6g0J5PEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lU7H4J5PEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lU7u8J5PEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_oikvoJ5PEeOVucdCGm9gFw" name="open"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_pMB8UJ5PEeOVucdCGm9gFw" name="close"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_riIRAJ5PEeOVucdCGm9gFw" name="createMessage"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_ubdOkJ5PEeOVucdCGm9gFw" name="updateMessage"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_zH6WoJ5PEeOVucdCGm9gFw" name="getMessageData"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5wOHYJ5PEeOVucdCGm9gFw" name="MessageListDbHelper">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_f5T-UJ5QEeOVucdCGm9gFw" name="TABLE" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gWN8wJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gWN8wZ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_gWOj0J5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_kag4oJ5QEeOVucdCGm9gFw" name="COLUMN_ID" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ksmHIJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ksmuMJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_ksnVQJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mXimAJ5QEeOVucdCGm9gFw" name="COLUMN_MESSAGE" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mlka8J5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mlka8Z5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_mllCAJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_oVL-cJ5QEeOVucdCGm9gFw" name="COLUMN_MSIZE" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ohUV8J5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ohU9AJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_ohWLIJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_qLgm4J5QEeOVucdCGm9gFw" name="COLUMN_MFONT" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qb7BcJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qb7ogJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_qb8PkJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_r54NMJ5QEeOVucdCGm9gFw" name="COLUMN_MSTYLE" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sOoVMJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sOo8QJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_sOpjUJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_t5qToJ5QEeOVucdCGm9gFw" name="COLUMN_MCOLOR" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uHyPMJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uHy2QJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_uHzdUJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_vuqGYJ5QEeOVucdCGm9gFw" name="COLUMN_BG" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v_FvEJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v_GWIJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v_G9MJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_xl0cUJ5QEeOVucdCGm9gFw" name="COLUMN_TEXT_X" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_x2ptoJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_x2qUsJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_x2q7wJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_zj4rgJ5QEeOVucdCGm9gFw" name="COLUMN_TEXT_Y" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z3Ab0J5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z3BC4J5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_z3Bp8J5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_11StcJ5QEeOVucdCGm9gFw" name="COLUMN_ROTATE" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2E_WUJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2E_9YJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_2E_9YZ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3p5eoJ5QEeOVucdCGm9gFw" name="COLUMN_PIC" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_35ahUJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_35bIYJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_35bvcJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_53taAJ5QEeOVucdCGm9gFw" name="DATABASE_NAME" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6GI3kJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6GJeoJ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_6GJeoZ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_8IslMJ5QEeOVucdCGm9gFw" name="DATABASE_VERSION" visibility="public">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8WphoJ5QEeOVucdCGm9gFw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8WphoZ5QEeOVucdCGm9gFw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_8WqIsJ5QEeOVucdCGm9gFw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="__tpvIJ5PEeOVucdCGm9gFw" name="onCreate"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_B-voAJ5QEeOVucdCGm9gFw" name="onUpgrade"/>
+  </packagedElement>
+</uml:Model>
