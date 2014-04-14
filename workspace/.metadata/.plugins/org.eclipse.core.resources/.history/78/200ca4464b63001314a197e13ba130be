@@ -1,8 +1,0 @@
-package com.yanas.mobileapp.mypic;
-
-public class GlobalSettings {
-
-	public static boolean mainActivity = true;
-
-	public static boolean dataStoreActivity = true;
-}
