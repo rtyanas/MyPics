@@ -27,8 +27,11 @@ public class GetImageActivity extends Activity {
  
         img = (ImageView)findViewById(R.id.mypic);
  
-        ((Button) findViewById(R.id.mypic))
-                .setOnClickListener(new OnClickListener() {
+     
+        
+     // ((Button) findViewById(R.id.mypic))
+        
+        img.setOnClickListener(new OnClickListener() {
                     public void onClick(View arg0) {
                         Intent intent = new Intent();
                         intent.setType("image/*");

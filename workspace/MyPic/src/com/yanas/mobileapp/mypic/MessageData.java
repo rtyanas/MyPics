@@ -12,6 +12,9 @@ public class MessageData implements Serializable {
 	/**
 	 * 
 	 */
+	
+	public static final float textPosXDefault = 50.0f;
+	public static final float textPosYDefault = 100.0f;
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String message ;
@@ -31,7 +34,7 @@ public class MessageData implements Serializable {
 	public MessageData() {
 		this(DEFAULT_MESSAGE, 18, "Sans Serif", 
 				Typeface.ITALIC, Color.BLACK, 
-				0,  "", Color.LTGRAY, 50.0f, 100.0f);
+				0,  "", Color.LTGRAY, textPosXDefault, textPosYDefault);
 	}
 	  
 	  

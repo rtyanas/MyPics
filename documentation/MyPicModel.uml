@@ -141,7 +141,7 @@ to be on the MyPic screen&#xD;
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_ew5-IJ2HEeO7TeLUrukWTQ" name="A_display user options_use this picture as wallpaper" memberEnd="_ew5-IZ2HEeO7TeLUrukWTQ _ew5-JJ2HEeO7TeLUrukWTQ">
-    <ownedEnd xmi:type="uml:Property" xmi:id="_ew5-IZ2HEeO7TeLUrukWTQ" name="display user options" type="_XywtAJsmEeO7TeLUrukWTQ" association="_ew5-IJ2HEeO7TeLUrukWTQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ew5-IZ2HEeO7TeLUrukWTQ" name="display user options" type="_26--sJslEeO7TeLUrukWTQ" association="_ew5-IJ2HEeO7TeLUrukWTQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ew5-Ip2HEeO7TeLUrukWTQ" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ew5-I52HEeO7TeLUrukWTQ" value="1"/>
     </ownedEnd>

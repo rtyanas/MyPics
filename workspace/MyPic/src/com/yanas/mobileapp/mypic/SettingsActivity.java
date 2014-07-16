@@ -72,6 +72,16 @@ public class SettingsActivity extends Activity {
 			}
 		});
 
+		Button resetTextPosButton = (Button)findViewById(R.id.reset_text_pos_button);
+		resetTextPosButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				messageD.setTextX(MessageData.textPosXDefault);
+				messageD.setTextY(MessageData.textPosYDefault);
+			}
+		});
+
 	}
 
 	@Override

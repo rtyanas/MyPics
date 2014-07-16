@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">MyPic</string>
@@ -11,6 +10,9 @@
     <string name="title_activity_settings">MyPic > Settings</string>
     <string name="init_text">You are fabulous</string>
     <string name="done">Done</string>
+    <string name="image_update_str">Image Update</string>
+    <string name="reset_text_pos_str">Reset Text Pos</string>
+    
 
     <string-array name="Fonts">
         <item>Normal</item>
@@ -65,5 +67,6 @@
     <string name="tips_help_menu">Tips</string>
     <string name="version_menu_item">Version</string>
     <string name="wallpaper_menu_item">Use This As Wallpaper</string>
+    <string name="message_text_string">Message for Pic</string>
 
 </resources>
