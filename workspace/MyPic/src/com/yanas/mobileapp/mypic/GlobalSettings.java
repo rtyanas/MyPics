@@ -2,7 +2,7 @@ package com.yanas.mobileapp.mypic;
 
 public class GlobalSettings {
 
-	static boolean allSettings = true;
+	static boolean allSettings = false;
 	
 	public static boolean mainActivity = allSettings;
 

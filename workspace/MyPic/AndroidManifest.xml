@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yanas.mobileapp.mypic"
-    android:versionCode="13"
-    android:versionName="MyPic 13" >
+    android:versionCode="16"
+    android:versionName="MyPic 16" >
 
     <uses-sdk
         android:minSdkVersion="8"

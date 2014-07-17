@@ -51,7 +51,7 @@ import android.widget.Toast;
     private static final int SELECT_PICTURE = 1;
     private static final int MESSAGE_SETTINGS = 2;
     public static final int BACKGROUND_SETTINGS = 3;
-    private String selectedImagePath;
+//    private String selectedImagePath;
     private Uri selectedImageUri = null;
 
     private ImageView img;
@@ -79,11 +79,20 @@ import android.widget.Toast;
         setContentView(R.layout.activity_main);
         mainActThis = this;
         
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        widthDisplay = size.x;
-        heightDisplay = size.y;
+    	if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) 
+    	{
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            widthDisplay = size.x;
+            heightDisplay = size.y;    		
+    	}
+    	else
+    	{
+            widthDisplay = this.widthDisplay;
+            heightDisplay = this.heightDisplay;    		
+    	}
+
         
         messData = retrieveSettings(); // new MessageData();
         // selectedImagePath = messData.getPic();
@@ -236,13 +245,7 @@ import android.widget.Toast;
 		
 		            	                case DragEvent.ACTION_DRAG_STARTED:
 		
-		            	                    textXoffset = event.getX() - messData.getTextX(); 
-		            	                    textYoffset = event.getY() - messData.getTextY(); 
-		            	                    
-		            	                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_STARTED."+
-		            	                    " X:"+ event.getX() +", Y:"+ event.getY() +
-		            	                    ", text X: "+  messData.getTextX() +", Y: "+  messData.getTextX() +
-		            	                    ", offSet X: "+ textXoffset +", Y: "+ textYoffset );
+		            	                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_STARTED.");
 		            	                    
 		            	                    // Determines if this View can accept the dragged data
 		            	                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
@@ -271,7 +274,13 @@ import android.widget.Toast;
 		
 		            	                case DragEvent.ACTION_DRAG_ENTERED: 
 		
-		            	                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_ENTERED.");
+		            	                    textXoffset = event.getX() - messData.getTextX(); 
+		            	                    textYoffset = event.getY() - messData.getTextY(); 
+		            	                    
+		            	                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_ENTERED."+
+				            	                    " X:"+ event.getX() +", Y:"+ event.getY() +
+				            	                    ", text X: "+  messData.getTextX() +", Y: "+  messData.getTextY() +
+				            	                    ", offSet X: "+ textXoffset +", Y: "+ textYoffset );
 		
 		            	                    // Applies a green tint to the View. Return true; the return value is ignored.
 		
@@ -429,8 +438,8 @@ import android.widget.Toast;
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
-                String logStr = "OnAct - Image Path : " + selectedImagePath +
+                // selectedImagePath = getPath(selectedImageUri);
+                String logStr = "OnAct - "+ // Image Path : " + selectedImagePath +
                 		        "\nselectedImageUri: "+ selectedImageUri.toString();
                 if(GlobalSettings.mainActivity) {
                 	Toast.makeText(this, logStr, Toast.LENGTH_LONG).show();
@@ -615,7 +624,8 @@ import android.widget.Toast;
 //        if(selectedImagePath != null)
 //    	  img.setImageURI(Uri.parse(selectedImagePath));
 
-        Toast.makeText(this, "selectedImageUri: "+ selectedImageUri, Toast.LENGTH_LONG).show();
+    	if(GlobalSettings.mainActivity) 
+    		Toast.makeText(this, "selectedImageUri: "+ selectedImageUri, Toast.LENGTH_LONG).show();
 
         InputStream is = null;
 		try {
@@ -624,7 +634,7 @@ import android.widget.Toast;
 				{
 					is = getContentResolver().openInputStream(selectedImageUri);
 		            if(is != null) {
-	                    Toast.makeText(this, "Using InputStream", Toast.LENGTH_LONG).show();
+//	                    Toast.makeText(this, "Using InputStream", Toast.LENGTH_LONG).show();
 		            	Bitmap bitmap = BitmapFactory.decodeStream(is);
 		            	try {
 							is.close();
@@ -676,13 +686,17 @@ import android.widget.Toast;
         tv.setTypeface(MessageData.stringToTypeFace(messData.getmFont() ), messData.getmStyle());
 
     	if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
-    		if( messData.getTextX()  > widthDisplay || messData.getTextX() < 0 )
+    		if( messData.getTextX()  > widthDisplay || messData.getTextX() < 0 ) {
     			tv.setX(MessageData.textPosXDefault);
+       			messData.setTextX(MessageData.textPosXDefault);
+    		}
     		else
     			tv.setX(messData.getTextX());
     		
-       		if( messData.getTextY()  > heightDisplay || messData.getTextY() < 0 )
-       			tv.setY(MessageData.textPosYDefault);
+       		if( messData.getTextY()  > heightDisplay || messData.getTextY() < 0 ) {
+       			tv.setY(MessageData.textPosYDefault);       			
+       			messData.setTextY(MessageData.textPosYDefault);
+       		}
        		else
        			tv.setY(messData.getTextY());
     	}
