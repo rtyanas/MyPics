@@ -8,6 +8,7 @@ import com.yanas.mobileapp.mypic.datastore.MessageListDbData;
 import com.yanas.mobileapp.mypic.datastore.MessageListDbHelper;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -627,34 +628,78 @@ import android.widget.Toast;
     	if(GlobalSettings.mainActivity) 
     		Toast.makeText(this, "selectedImageUri: "+ selectedImageUri, Toast.LENGTH_LONG).show();
 
-        InputStream is = null;
-		try {
-			if(selectedImageUri != null &&   !  "".equals(selectedImageUri.toString()) ) {
+			if(/* selectedImageUri != null &&  */  !  "".equals(selectedImageUri.toString()) ) {
 				if(this.getContentResolver() != null)
 				{
-					is = getContentResolver().openInputStream(selectedImageUri);
-		            if(is != null) {
-		            	Bitmap bitmap = BitmapFactory.decodeStream(is);
-		            	try {
-							is.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            	setImageWithBitmap(bitmap);	
-		            }									
+					new ImageLoad().execute(selectedImageUri);
+					// loadUriImageExec(selectedImageUri);
 				}
 				else 
 				{
-			        Toast.makeText(this, "getContentResolver() is null!", Toast.LENGTH_LONG).show();					
+			    	if(GlobalSettings.mainActivity) 
+			    		Toast.makeText(this, "getContentResolver() is null!", Toast.LENGTH_LONG).show();					
 				}
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Toast.makeText(this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
-		}	
 
+    }
+    
+    
+    /**
+     * Load image using AsyncTask
+     * @param uri_in
+     */
+//    private void loadUriImageExec(Uri uri_in) {
+//		try {
+//        InputStream is = null;
+//		is = getContentResolver().openInputStream(uri_in);
+//        if(is != null) {
+//        	Bitmap bitmap = BitmapFactory.decodeStream(is);
+//        	try {
+//				is.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//        	setImageWithBitmap(bitmap);	
+//        }									
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			Toast.makeText(this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
+//		}	
+//    }
+    
+    
+    public class ImageLoad extends AsyncTask<Uri, Integer, Bitmap > {
+
+		@Override
+		protected Bitmap doInBackground(Uri... uri_in) {
+        	Bitmap bitmap = null;
+			try {
+		        InputStream is = null;
+				is = getContentResolver().openInputStream(uri_in[0]);
+		        if(is != null) {
+		        	bitmap = BitmapFactory.decodeStream(is);
+		        	try {
+						is.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        }									
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(MainActivity.this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
+				}	
+			return bitmap;
+		}
+    	
+		@Override
+		protected void onPostExecute(Bitmap resultBitmap) {
+        	setImageWithBitmap(resultBitmap);	
+			
+		}
     }
     
 
@@ -750,10 +795,8 @@ import android.widget.Toast;
     		img.setImageBitmap(bitmap_in );
         }
         else {
-        	if(GlobalSettings.mainActivity) {
-            	Toast t = Toast.makeText(this, "Error showing pic, bitmap is null.", Toast.LENGTH_LONG);
-            	t.show();
-        	}
+        	if(GlobalSettings.mainActivity) 
+            	Toast.makeText(this, "Error showing pic, bitmap is null.", Toast.LENGTH_LONG).show();
         }
     }
     
@@ -776,10 +819,17 @@ import android.widget.Toast;
 				messListDbData.getDatabase(), "SELECT COUNT(*) FROM "+ MessageListDbHelper.TABLE, null);
     	
     	if(numRows > 0) {
-        	messListDbData.updateMessage(messData_in);
+        	if(messListDbData.updateMessage(messData_in) == 0 && GlobalSettings.mainActivity)
+        		Log.e("MainActivity", "saveNewSettings - Not saved");
+        	else
+        		Log.d("MainActivity", "saveNewSettings - Saved OK");
+
     	}
     	else {
-        	messListDbData.createMessage(messData_in);    		
+        	if(messListDbData.createMessage(messData_in) == 0 && GlobalSettings.mainActivity)
+        		Log.e("MainActivity", "saveNewSettings - Not saved");
+        	else
+        		Log.d("MainActivity", "saveNewSettings - Saved OK");
     	}
     	
     	messListDbData.close();
