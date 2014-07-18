@@ -51,7 +51,7 @@ public class MessageListDbData {
 	    dbHelper.close();
 	  }
 
-	  public MessageData createMessage(MessageData messageD) {
+	  public long createMessage(MessageData messageD) {
 	    ContentValues values = new ContentValues();
 
 	    values.put(MessageListDbHelper.COLUMN_MESSAGE, messageD.getMessage());
@@ -74,7 +74,7 @@ public class MessageListDbData {
 //		    newBuilding = cursorToBuilding(cursor);
 //		    cursor.close();
 //	    }
-	    return messageD;
+	    return insertId;
 	  }
 
 	  public int updateMessage(MessageData messageD) {
