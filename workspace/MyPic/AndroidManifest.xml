@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yanas.mobileapp.mypic"
-    android:versionCode="16"
-    android:versionName="MyPic 16" >
+    android:versionCode="18"
+    android:versionName="MyPic 18" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -10,6 +10,7 @@
     <!-- <uses-permission android:name="android.permission.BIND_WALLPAPER" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
