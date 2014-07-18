@@ -527,25 +527,25 @@ import android.widget.Toast;
         } // resultCode == RESULT_OK
     }
 
-    public String getPath(Uri uri) {
-        
-    	Cursor cursor = null;
-
-        try {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        String scheme = uri.getScheme();
-        String pathLoc = uri.getPath();
-        
-        // cursor = managedQuery(uri, projection, null, null, null);
-        cursor = getContentResolver().query(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    	} finally {
-    		if(cursor != null)
-    			cursor.close();
-    	}
-    }
+//    public String getPath(Uri uri) {
+//        
+//    	Cursor cursor = null;
+//
+//        try {
+//        String[] projection = { MediaStore.Images.Media.DATA };
+//        String scheme = uri.getScheme();
+//        String pathLoc = uri.getPath();
+//        
+//        // cursor = managedQuery(uri, projection, null, null, null);
+//        cursor = getContentResolver().query(uri, projection, null, null, null);
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        return cursor.getString(column_index);
+//    	} finally {
+//    		if(cursor != null)
+//    			cursor.close();
+//    	}
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -629,12 +629,11 @@ import android.widget.Toast;
 
         InputStream is = null;
 		try {
-			if(selectedImageUri != null) {
-				if(getContentResolver() != null)
+			if(selectedImageUri != null &&   !  "".equals(selectedImageUri.toString()) ) {
+				if(this.getContentResolver() != null)
 				{
 					is = getContentResolver().openInputStream(selectedImageUri);
 		            if(is != null) {
-//	                    Toast.makeText(this, "Using InputStream", Toast.LENGTH_LONG).show();
 		            	Bitmap bitmap = BitmapFactory.decodeStream(is);
 		            	try {
 							is.close();
@@ -653,6 +652,7 @@ import android.widget.Toast;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Toast.makeText(this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
 		}	
 
     }
