@@ -56,7 +56,7 @@ import android.widget.Toast;
     private Uri selectedImageUri = null;
 
     private ImageView img;
-    private MainActivity mainActThis;
+    // private MainActivity mainActThis;
 	MessageData messData;
 	private static final String TEXT_TAG = "text_message";
 
@@ -78,7 +78,8 @@ import android.widget.Toast;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainActThis = this;
+        
+    	if(GlobalSettings.mainActivity) Log.d("MainActivity", "onCreate");
         
     	if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) 
     	{
@@ -109,10 +110,7 @@ import android.widget.Toast;
 //            actionBar.setHomeButtonEnabled(false);
 //        }
 
-        
-    	if(GlobalSettings.mainActivity) Log.d("MainActivity", "onCreate");
-
-    	// TextView tv = (TextView)findViewById(R.id.message_data);
+        // TextView tv = (TextView)findViewById(R.id.message_data);
     	tv = new TextView(this);
     	RelativeLayout vg = (RelativeLayout)findViewById(R.id.main_layout) ;
 
@@ -177,7 +175,7 @@ import android.widget.Toast;
 								                    int width = 200;
 								    				int height = 100;
 						
-								    				RelativeLayout rl = (RelativeLayout)mainActThis.findViewById(R.id.main_layout);
+								    				RelativeLayout rl = (RelativeLayout)MainActivity.this.findViewById(R.id.main_layout);
 								    				
 								                    if(rl != null) {
 									                    // Sets the width of the shadow to half the width of the original View
@@ -354,7 +352,7 @@ import android.widget.Toast;
 		            	                        String dragData = (String) item.getText();
 		
 		            	                        // Displays a message containing the dragged data.
-		            	                        Toast.makeText(mainActThis, "Dragged data is " + dragData, Toast.LENGTH_LONG);
+		            	                        Toast.makeText(MainActivity.this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
 		
 		            	                        // Turns off any color tints
 		            	                        // ((ImageView) v).clearColorFilter();
@@ -385,10 +383,10 @@ import android.widget.Toast;
 		
 		            	                        // Does a getResult(), and displays what happened.
 		            	                        if (event.getResult()) {
-		            	                            Toast.makeText(mainActThis, "The drop was handled.", Toast.LENGTH_LONG);
+		            	                            Toast.makeText(MainActivity.this, "The drop was handled.", Toast.LENGTH_LONG);
 		
 		            	                        } else {
-		            	                            Toast.makeText(mainActThis, "The drop didn't work.", Toast.LENGTH_LONG);
+		            	                            Toast.makeText(MainActivity.this, "The drop didn't work.", Toast.LENGTH_LONG);
 		
 		            	                        };
 		
@@ -565,7 +563,7 @@ import android.widget.Toast;
             = WallpaperManager.getInstance(getApplicationContext());
 
             Bitmap bitmap;
-        	View v1 = img.getRootView();
+        	View v1 = findViewById(R.id.main_layout);  //  img.getRootView();
         	v1.setDrawingCacheEnabled(true);
         	bitmap = Bitmap.createBitmap(v1.getDrawingCache());
         	v1.setDrawingCacheEnabled(false);
@@ -574,7 +572,7 @@ import android.widget.Toast;
 			} catch (IOException e1) {
 		    	Toast.makeText(this, "Error, wallpaper not set", Toast.LENGTH_LONG);
 				
-				if(GlobalSettings.mainActivity) Log.d("mainActivity onOptionsItemSelected", e1.getMessage());
+				if(GlobalSettings.mainActivity) Log.e("mainActivity onOptionsItemSelected", e1.getMessage());
 			}
 
             return true;
@@ -625,21 +623,23 @@ import android.widget.Toast;
 //        if(selectedImagePath != null)
 //    	  img.setImageURI(Uri.parse(selectedImagePath));
 
-    	if(GlobalSettings.mainActivity) 
+    	if(GlobalSettings.mainActivity) {
     		Toast.makeText(this, "selectedImageUri: "+ selectedImageUri, Toast.LENGTH_LONG).show();
+    		Log.d("onResume", "selectedImageUri: "+ selectedImageUri);
+    	}
 
-			if(/* selectedImageUri != null &&  */  !  "".equals(selectedImageUri.toString()) ) {
-				if(this.getContentResolver() != null)
-				{
-					new ImageLoad().execute(selectedImageUri);
-					// loadUriImageExec(selectedImageUri);
-				}
-				else 
-				{
-			    	if(GlobalSettings.mainActivity) 
-			    		Toast.makeText(this, "getContentResolver() is null!", Toast.LENGTH_LONG).show();					
-				}
+		if(/* selectedImageUri != null &&  */  !  "".equals(selectedImageUri.toString()) ) {
+			if(this.getContentResolver() != null)
+			{
+				new ImageLoad().execute(selectedImageUri);
+				// loadUriImageExec(selectedImageUri);
 			}
+			else 
+			{
+		    	if(GlobalSettings.mainActivity) 
+		    		Toast.makeText(this, "getContentResolver() is null!", Toast.LENGTH_LONG).show();					
+			}
+		}
 
     }
     
@@ -818,14 +818,14 @@ import android.widget.Toast;
 		long numRows = DatabaseUtils.longForQuery(
 				messListDbData.getDatabase(), "SELECT COUNT(*) FROM "+ MessageListDbHelper.TABLE, null);
     	
-    	if(numRows > 0) {
+    	if(numRows > 0) { // DB exists
         	if(messListDbData.updateMessage(messData_in) == 0 && GlobalSettings.mainActivity)
         		Log.e("MainActivity", "saveNewSettings - Not saved");
         	else
         		Log.d("MainActivity", "saveNewSettings - Saved OK");
 
     	}
-    	else {
+    	else { // Create new DB
         	if(messListDbData.createMessage(messData_in) == 0 && GlobalSettings.mainActivity)
         		Log.e("MainActivity", "saveNewSettings - Not saved");
         	else
@@ -849,6 +849,13 @@ import android.widget.Toast;
     	if(GlobalSettings.mainActivity) Log.d("MainActivity", "retrieveSettings messageData: "+ messg);
 
     	return messg;
+    }
+    
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	setText();
     }
 
     /**
@@ -1067,4 +1074,6 @@ import android.widget.Toast;
         }
     
 **/    
+    
+    
 }
