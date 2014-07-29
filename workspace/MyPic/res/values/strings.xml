@@ -54,6 +54,9 @@
         <item>0</item>
         <item>-90</item>
         <item>90</item>
+        <item>-45</item>
+        <item>45</item>
+        <item>180</item>
     </string-array>
 
     <string name="font">Font:</string>
