@@ -675,6 +675,12 @@ import android.widget.Toast;
 		@Override
 		protected Bitmap doInBackground(Uri... uri_in) {
         	Bitmap bitmap = null;
+        	
+        	if(uri_in.length <= 0) 
+        	{
+        		return null;
+        	}
+        	
 			try {
 		        InputStream is = null;
 				is = getContentResolver().openInputStream(uri_in[0]);
@@ -683,13 +689,11 @@ import android.widget.Toast;
 		        	try {
 						is.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Log.e("ImageLoad", "doInBackground"+ e.getMessage());
 					}
 		        }									
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e("ImageLoad", "doInBackground, FileNotFound"+ e.getMessage());
 					Toast.makeText(MainActivity.this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
 				}	
 			return bitmap;
@@ -697,7 +701,8 @@ import android.widget.Toast;
     	
 		@Override
 		protected void onPostExecute(Bitmap resultBitmap) {
-        	setImageWithBitmap(resultBitmap);	
+			if(resultBitmap != null)
+				setImageWithBitmap(resultBitmap);	
 			
 		}
     }
@@ -719,6 +724,18 @@ import android.widget.Toast;
  	@TargetApi(Build.VERSION_CODES.HONEYCOMB) 
  	private void setText() {
     	// TextView tv = (TextView)findViewById(R.id.message_data);
+ 		
+ 		if(messData == null)
+ 		{
+ 	 		if(GlobalSettings.mainActivity) {
+ 	 			String err = "Message Data is null";
+				Toast.makeText(MainActivity.this, err, Toast.LENGTH_SHORT).show();
+				Log.e("MainActivity", "setText() "+ err);
+
+ 	 		}
+ 	 		return;
+ 		}
+ 		
     	String textData = messData.getMessage();
     	
     	if(textData.equals(MessageData.DEFAULT_MESSAGE)) {
