@@ -94,6 +94,8 @@ public class MessageListDbData {
 		    int insertId = database.update(MessageListDbHelper.TABLE, values, 
 		    		MessageListDbHelper.COLUMN_ID +"="+ messageD.getId(), null);
 		    
+		    if(GlobalSettings.dataStore) Log.d("MessageListDbData", "MessageDB ID: "+ messageD.getId() +" insert Return: "+ insertId);
+		    
 		    return insertId;
 	  }
 
