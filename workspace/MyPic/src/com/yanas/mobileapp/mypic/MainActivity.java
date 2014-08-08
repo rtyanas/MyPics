@@ -79,7 +79,10 @@ import android.widget.Toast;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-    	if(GlobalSettings.mainActivity) Log.d("MainActivity", "onCreate");
+    	if(GlobalSettings.mainActivity) {
+    		Log.d("MainActivity", "onCreate");
+            Toast.makeText(MainActivity.this, "onCreate()", Toast.LENGTH_LONG).show();
+    	}
         
     	if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) 
     	{
@@ -101,16 +104,6 @@ import android.widget.Toast;
 
         selectedImageUri = Uri.parse(messData.getPic());
 
-
-        // Set up the action bar.
-//        final ActionBar actionBar = getActionBar();
-//        setTitle("MyPic");
-//        if(actionBar != null) {
-//            actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-//            actionBar.setHomeButtonEnabled(false);
-//        }
-
-        // TextView tv = (TextView)findViewById(R.id.message_data);
     	tv = new TextView(this);
     	RelativeLayout vg = (RelativeLayout)findViewById(R.id.main_layout) ;
 
@@ -157,15 +150,6 @@ import android.widget.Toast;
         		            		new View.DragShadowBuilder() {
 				        		                // The drag shadow image, defined as a drawable thing
 				        		                private Drawable shadow = new ColorDrawable(Color.LTGRAY);;
-
-//								    			public View.DragShadowBuilder(View v) {
-//						
-//								                    // Stores the View parameter passed to myDragShadowBuilder.
-//								                    super(v);
-//						
-//								                    // Creates a draggable image that will fill the Canvas provided by the system.
-//								                    shadow = new ColorDrawable(Color.LTGRAY);
-//								                }
 						
 								                // Defines a callback that sends the drag shadow dimensions and touch point back to the
 								                // system.
@@ -250,12 +234,7 @@ import android.widget.Toast;
 		            	                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
 		
 		            	                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_STARTED.");
-		
-		            	                        // As an example of what your application might do,
-		            	                        // applies a blue color tint to the View to indicate that it can accept
-		            	                        // data.
-		            	                        // ((ImageView) v).setColorFilter(Color.BLUE);
-		
+
 		            	                        // Invalidate the view to force a redraw in the new tint
 		            	                        v.invalidate();
 		
@@ -296,28 +275,6 @@ import android.widget.Toast;
 		
 		            	                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_LOCATION. X:"+ 
 		            	                    									event.getX() + ", Y: "+ event.getY());
-//		            	                    float currxPos = event.getX();
-//		            	                    float newxPos = 0.0f;
-//		            	                    float curryPos = event.getY();
-//		            	                    float newyPos = 0.0f;
-//		            	                    
-//		            	                    if(currxPos > 700)
-//		            	                    	newxPos = currxPos - 700;
-//		            	                    else if(currxPos > 600)
-//		            	                    	newxPos = currxPos - 600;
-//		            	                    else if(currxPos > 400)
-//		            	                    	newxPos = currxPos - 400;
-//		            	                    else if(currxPos > 200)
-//		            	                    	newxPos = currxPos - 200;
-//		            	                    else if(currxPos > 100)
-//		            	                    	newxPos = currxPos - 100;
-//		            	                    else if(currxPos > 50)
-//		            	                    	newxPos = currxPos - 50;
-//		            	                    else if(currxPos > 25)
-//		            	                    	newxPos = currxPos - 25;
-//		            	                    
-//		            	                    if(curryPos > 30)
-//		            	                    	newyPos = curryPos - 30;
 		            	                    
 		            	                    messData.setTextX(event.getX());
 		            	                    messData.setTextY(event.getY());
@@ -352,7 +309,7 @@ import android.widget.Toast;
 		            	                        String dragData = (String) item.getText();
 		
 		            	                        // Displays a message containing the dragged data.
-		            	                        Toast.makeText(MainActivity.this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
+		            	                        if(GlobalSettings.mainActivity) Toast.makeText(MainActivity.this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
 		
 		            	                        // Turns off any color tints
 		            	                        // ((ImageView) v).clearColorFilter();
@@ -382,7 +339,7 @@ import android.widget.Toast;
 		            	                        v.invalidate();
 		
 		            	                        // Does a getResult(), and displays what happened.
-		            	                        if (event.getResult()) {
+		            	                        if (GlobalSettings.mainActivity  && event.getResult()) {
 		            	                            Toast.makeText(MainActivity.this, "The drop was handled.", Toast.LENGTH_LONG);
 		
 		            	                        } else {
@@ -455,62 +412,6 @@ import android.widget.Toast;
             		saveNewSettings(messData);
                 }
 
-                // BitmapFactory.Options options = new BitmapFactory.Options();
-                // options.inSampleSize = 100;
-                // options.inDensity = 200;
-
-/*
-                InputStream is = null;
-				try {
-					if(selectedImageUri != null)
-					{
-						is = getContentResolver().openInputStream(selectedImageUri);
-		                if(is != null) 
-		                {
-	                        Toast.makeText(this, "Using InputStream", Toast.LENGTH_LONG).show();
-		                	Bitmap bitmap = BitmapFactory.decodeStream(is);
-		                	try {
-								is.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-		                	setImageWithBitmap(bitmap);
-		                	
-		                }						
-					}
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-                if (is == null) {
-                    Bitmap bitmap = setImage(selectedImagePath);
-                    if(bitmap != null) {
-                		messData.setPic(selectedImagePath);
-                		saveNewSettings(messData);                	
-                    }
-                	
-                } else {
-            		messData.setPic(selectedImagePath);
-            		saveNewSettings(messData);                	
-                }
-                
-                
-//                Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
-//                if(bitmap != null) {
-//    				Matrix m = img.getImageMatrix();
-//    				m.postRotate(messData.getRotate());
-//    				bitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-//    						  bitmap.getWidth(), bitmap.getHeight(), m, true);
-//    				img.setImageBitmap(bitmap );
-//
-////                    // img.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath) );                	
-//            		messData.setPic(selectedImagePath);
-//            		saveNewSettings(messData);
-//                }
- * 
- */
             } // requestCode == SELECT_PICTURE
             else if(requestCode == MESSAGE_SETTINGS) {
         		messData = (MessageData)data.getSerializableExtra(MainActivity.MESSAGE);
@@ -526,26 +427,7 @@ import android.widget.Toast;
         } // resultCode == RESULT_OK
     }
 
-//    public String getPath(Uri uri) {
-//        
-//    	Cursor cursor = null;
-//
-//        try {
-//        String[] projection = { MediaStore.Images.Media.DATA };
-//        String scheme = uri.getScheme();
-//        String pathLoc = uri.getPath();
-//        
-//        // cursor = managedQuery(uri, projection, null, null, null);
-//        cursor = getContentResolver().query(uri, projection, null, null, null);
-//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        cursor.moveToFirst();
-//        return cursor.getString(column_index);
-//    	} finally {
-//    		if(cursor != null)
-//    			cursor.close();
-//    	}
-//    }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -642,32 +524,6 @@ import android.widget.Toast;
 		}
 
     }
-    
-    
-    /**
-     * Load image using AsyncTask
-     * @param uri_in
-     */
-//    private void loadUriImageExec(Uri uri_in) {
-//		try {
-//        InputStream is = null;
-//		is = getContentResolver().openInputStream(uri_in);
-//        if(is != null) {
-//        	Bitmap bitmap = BitmapFactory.decodeStream(is);
-//        	try {
-//				is.close();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//        	setImageWithBitmap(bitmap);	
-//        }									
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			Toast.makeText(this, "File not found: "+ selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
-//		}	
-//    }
     
     
     public class ImageLoad extends AsyncTask<Uri, Integer, Bitmap > {
@@ -875,222 +731,5 @@ import android.widget.Toast;
     	setText();
     }
 
-    /**
-     * Move the text somewhere on the screen.
-     * @author RT
-     *
-     */
-    
-    
-/***
- ** Make compatible with Froyo Level, move to local to use if statments
-
-    // @SuppressLint("NewApi")
-	protected class myDragEventListener implements View.OnDragListener {
-
-        // This is the method that the system calls when it dispatches a drag event to the
-        // listener.
-        public boolean onDrag(View v, DragEvent event) {
-
-            // Defines a variable to store the action type for the incoming event
-            final int action = event.getAction();
-
-            // if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, Start.");
-
-            // Handles each of the expected events
-            switch(action) {
-
-                case DragEvent.ACTION_DRAG_STARTED:
-
-                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_STARTED.");
-
-                    // Determines if this View can accept the dragged data
-                    if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-
-                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_STARTED.");
-
-                        // As an example of what your application might do,
-                        // applies a blue color tint to the View to indicate that it can accept
-                        // data.
-                        // ((ImageView) v).setColorFilter(Color.BLUE);
-
-                        // Invalidate the view to force a redraw in the new tint
-                        v.invalidate();
-
-                        // returns true to indicate that the View can accept the dragged data.
-                        return(true);
-
-                        } else {
-
-                        // Returns false. During the current drag and drop operation, this View will
-                        // not receive events again until ACTION_DRAG_ENDED is sent.
-                        return(false);
-
-                        }
-                    // break;
-
-                case DragEvent.ACTION_DRAG_ENTERED: 
-
-                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_ENTERED.");
-
-                    // Applies a green tint to the View. Return true; the return value is ignored.
-
-                    // ((ImageView) v).setColorFilter(Color.GREEN);
-
-                    // Invalidate the view to force a redraw in the new tint
-                    v.invalidate();
-
-                    return(true);
-
-                    // break;
-
-                    case DragEvent.ACTION_DRAG_LOCATION:
-
-                    if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_LOCATION. X:"+ 
-                    									event.getX() + ", Y: "+ event.getY() );
-
-                    messData.setTextX(event.getX());
-                    messData.setTextY(event.getY());
-
-                    // Ignore the event
-                        return(true);
-
-                    // break;
-
-                    case DragEvent.ACTION_DRAG_EXITED:
-
-                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_EXITED.");
-
-                        // Re-sets the color tint to blue. Returns true; the return value is ignored.
-                        // ((ImageView) v).setColorFilter(Color.BLUE);
-
-                        // Invalidate the view to force a redraw in the new tint
-                        v.invalidate();
-
-                        return(true);
-
-                    // break;
-
-                    case DragEvent.ACTION_DROP:
-
-                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DROP.");
-
-                        // Gets the item containing the dragged data
-                        ClipData.Item item = event.getClipData().getItemAt(0);
-
-                        // Gets the text data from the item.
-                        String dragData = (String) item.getText();
-
-                        // Displays a message containing the dragged data.
-                        Toast.makeText(mainActThis, "Dragged data is " + dragData, Toast.LENGTH_LONG);
-
-                        // Turns off any color tints
-                        // ((ImageView) v).clearColorFilter();
-
-                        // Invalidates the view to force a redraw
-                        v.invalidate();
-
-                        // Returns true. DragEvent.getResult() will return true.
-                        return(true);
-
-                    // break;
-
-                    case DragEvent.ACTION_DRAG_ENDED:
-
-                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, ACTION_DRAG_ENDED.");
-
-                        setText();
-                		saveNewSettings(messData);
-                        
-                        // Turns off any color tinting
-                        // ((ImageView) v).clearColorFilter();
-
-                        // Invalidates the view to force a redraw
-                        v.invalidate();
-
-                        // Does a getResult(), and displays what happened.
-                        if (event.getResult()) {
-                            Toast.makeText(mainActThis, "The drop was handled.", Toast.LENGTH_LONG);
-
-                        } else {
-                            Toast.makeText(mainActThis, "The drop didn't work.", Toast.LENGTH_LONG);
-
-                        };
-
-                        if(GlobalSettings.mainActivity) Log.d("myDragEventListener","onDrag, Unknown action type received by OnDragListener.");
-
-                        // returns true; the value is ignored.
-                        return(true);
-
-                    // break;
-
-                    // An unknown action type was received.
-                    default:
-                        Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
-
-                    break;
-            };
-            
-            return true;
-        }
-    } // class myDragEventListener
-    
-    
-    // @SuppressLint("NewApi")
-	private static class MyDragShadowBuilder extends View.DragShadowBuilder {
-
-        // The drag shadow image, defined as a drawable thing
-        private static Drawable shadow;
-
-            // Defines the constructor for myDragShadowBuilder
-            // @SuppressLint("NewApi")
-			public MyDragShadowBuilder(View v) {
-
-                // Stores the View parameter passed to myDragShadowBuilder.
-                super(v);
-
-                // Creates a draggable image that will fill the Canvas provided by the system.
-                shadow = new ColorDrawable(Color.LTGRAY);
-            }
-
-            // Defines a callback that sends the drag shadow dimensions and touch point back to the
-            // system.
-            @Override
-            public void onProvideShadowMetrics (Point size, Point touch) {
-                // Defines local variables
-                int width;
-				int height;
-
-                // Sets the width of the shadow to half the width of the original View
-                width = getView().getWidth() * 2; // / 2;
-
-                // Sets the height of the shadow to half the height of the original View
-                height = getView().getHeight() * 2; //  / 2;
-
-                // The drag shadow is a ColorDrawable. This sets its dimensions to be the same as the
-                // Canvas that the system will provide. As a result, the drag shadow will fill the
-                // Canvas.
-                shadow.setBounds(0, 0, width, height);
-
-                // Sets the size parameter's width and height values. These get back to the system
-                // through the size parameter.
-                size.set(width, height);
-
-                // Sets the touch point's position to be in the middle of the drag shadow
-                touch.set(width / 2, height / 2);
-            }
-
-            // Defines a callback that draws the drag shadow in a Canvas that the system constructs
-            // from the dimensions passed in onProvideShadowMetrics().
-            @Override
-            public void onDrawShadow(Canvas canvas) {
-
-                // Draws the ColorDrawable in the Canvas passed in from the system.
-                shadow.draw(canvas);
-            }
-        }
-    
-**/    
-    
     
 }
